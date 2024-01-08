@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'titulo'%} Cadastro {% endblock %}
+
+{% block 'conteudo' %} 
+<link rel="stylesheet" type="text/css" href="{% static 'cadusuario.css' %}">
+
+<div class="container">
+
+    <div class="content">
+        <img src="{% static 'cad.png' %}" alt="Imagem de perfil" width="100">
+
+        <form method="post" action="{% url 'valida_cadastro' %}">
+            {% csrf_token %} <!-- token de segurança para o usuário não saber onde enviar requisição e nem o tipo -->
+
+            <h1>Cadastre-se</h1>
+            {% if status == '0' %}
+            <div class="alert alert-success" role="alert">
+                Cadastro realizado com sucesso!
+            </div>
+            {% endif %}
+            {% if status == '1' %}
+            <div class="alert alert-danger" role="alert">
+                Email não pode estar vazio!
+            </div>
+            {% endif %}
+            {% if status == '2' %}
+            <div class="alert alert-danger" role="alert">
+                Sua senha deve ter no mínimo 8 caracteres!
+            </div>  
+            {% endif %}
+
+            {% if status == '3' %}
+            <div class="alert alert-danger" role="alert">
+                Usuário já cadastrado!
+            </div>
+            {% endif %}    
+        
+            {% if status == '4' %}
+            <div class="alert alert-danger" role="alert">
+                Erro interno do sistema!
+            </div> 
+            {% endif %}
+
+            <hr>
+
+            <label>Email</label>
+            <input name='email' class="form-control" type="text" placeholder="Email">
+
+            <label>Senha</label>
+            <input name='senha' class="form-control" type="password" placeholder="Senha">
+
+            <label>Repetir Senha</label>
+            <input name='senha' class="form-control" type="password" placeholder="Repita a senha">
+            <br>
+            <input type="submit" class="btn" value="Enviar">
+            <a href="{% url 'login' %}">Já possui cadastro? Faça login</a>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
