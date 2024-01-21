@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'titulo'%} Disciplina {% endblock %}
+
+{% block 'conteudo' %} 
+<link rel="stylesheet" type="text/css" href="{% static 'disciplina.css' %}">
+
+<div class="container">
+
+    <div class="content">
+
+        <form>
+            <h1>DISCIPLINAS GRADUAÇÃO</h1>
+
+            <label>Nome:</label>
+
+            <br>
+            <a href="{% url 'ac' %}" class="btn">Algoritmo de Computadores</a>
+            <br>
+            <a href="{% url 'al' %}" class="btn">Álgebra Linear</a>
+            <br>
+            <a href="{% url 'md' %}" class="btn">Matemática Discreta</a>
+            <br>
+            <a href="{% url 'mc' %}" class="btn">Metodologia Científica</a>
+            <br>
+            <br>
+            <a style="margin-right: 200px;">Deletar Disciplina</a>
+            <a href="{% url 'caddisciplina' %}">Cadastrar Disciplina</a>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
