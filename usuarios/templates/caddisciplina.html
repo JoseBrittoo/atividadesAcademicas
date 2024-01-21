@@ -14,46 +14,40 @@
 </div>
 
 <div class="leftcontainer">
-<input type="text" placeholder="Disciplina">
+    <input type="text" placeholder="Disciplina">
 </div>
 
 <div class="leftcontainer">
     <img src="{% static 'descricao.png' %}" width="30">
-<label>Descrição</label>
+    <label>Descrição</label>
 </div>
 
 <div class="leftcontainer">
     <input type="text" style="margin-left: 10%; margin-right: 10%; padding: 4%">
-
 </div>
 
 <div class="leftcontainer">
     <img src="{% static 'tarefa.png' %}" width="30">
-<label>Tarefa</label>
+    <label>Tarefa</label>
 </div>
 
 <div class="leftcontainer">
-    
     <input type="text" style="margin-left: 10%; margin-right: 10%; padding: 3%" placeholder="Listar tarefas da disciplina aqui!">
-    </div>
+</div>
 
 <div class="leftcontainer">
     <img src="{% static 'anexo.png' %}" width="30">
-<label>Anexar arquivo</label>
+    <label>Anexar arquivo</label>
 </div>
 
 <div class="leftcontainer">
     <img src="{% static 'anotacoes.png' %}" width="30">
-<label>Anotações</label>
+    <label>Anotações</label>
 </div>
-
 
 <div class="container" style="margin-left: 20%;">
-    <a href="{% url 'disciplina' %}"style="margin-right: 50%; color: white">CANCELAR</a>
-    <a href="{% url 'disciplina' %}"style="color: #85A7EF">CONFIRMAR</a>
-
+    <a href="{% url 'disciplina' %}" style="margin-right: 50%; color: white">CANCELAR</a>
+    <a href="{% url 'disciplina' %}" style="color: #85A7EF">CONFIRMAR</a>
 </div>
-
-
 
 {% endblock %}
