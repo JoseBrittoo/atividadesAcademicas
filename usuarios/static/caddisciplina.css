@@ -1,0 +1,44 @@
+
+.leftcontainer {
+    margin-top: 2%;
+    display: flex; 
+    align-items: center;
+    max-width: 50%;
+    margin-bottom: 1%;
+}
+
+body {
+    background: #161F33;
+}
+
+h1 {
+    font-size: 30px;
+    color: white;
+}
+
+
+img {
+    margin-right: 10px;
+    margin-left: 20px;
+}
+
+input {
+    margin-left: 3%;
+    width: 100%;
+    padding: 15px;
+    background-color: #161F33;
+    border-radius: 15px;
+    border: 3px solid #8F9EBD;
+    color: white;
+    font-size: 20px;
+}
+
+input::placeholder{
+    font-size: 20px;
+}
+
+label {
+    color: white;
+    margin-left: 2%;
+    font-size: 20px;
+}

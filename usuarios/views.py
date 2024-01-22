@@ -11,6 +11,30 @@ def cadastro(request):
     status = request.GET.get('status')
     return render(request, 'cadastro.html', {'status': status})
 
+def disciplina(request):
+    status = request.GET.get('status')
+    return render(request, 'disciplina.html', {'status': status})
+
+def caddisciplina(request):
+    status = request.GET.get('status')
+    return render(request, 'caddisciplina.html', {'status': status})
+
+def ac(request):
+    status = request.GET.get('status')
+    return render(request, 'ac.html', {'status': status})
+
+def al(request):
+    status = request.GET.get('status')
+    return render(request, 'al.html', {'status': status})
+
+def md(request):
+    status = request.GET.get('status')
+    return render(request, 'md.html', {'status': status})
+
+def mc(request):
+    status = request.GET.get('status')
+    return render(request, 'mc.html', {'status': status})
+
 def valida_cadastro(request):
     email = request.POST.get('email')
     senha = request.POST.get('senha')
