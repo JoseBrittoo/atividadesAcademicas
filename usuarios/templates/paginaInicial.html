@@ -4,12 +4,13 @@
 {% block 'titulo'%} Página Inicial {% endblock %}
 
 {% block 'conteudo' %} 
-<link rel="stylesheet" type="text/css" href="{% static 'paginaInicial.css' %}">
+    {% include 'menu.html' %}
+    <link rel="stylesheet" type="text/css" href="{% static 'paginaInicial.css' %}">
 
-<div class="container">
-    <div class="content">
-        <!-- Conteúdo principal da página -->
-        <h1>Bem-vindo à Página Inicial</h1>
+    <div class="container">
+        <div class="content">
+           <!-- Conteúdo principal da página -->
+           <h1>Bem-vindo à Página Inicial</h1>
+        </div>
     </div>
-</div>
 {% endblock %}

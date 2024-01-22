@@ -70,7 +70,7 @@ def valida_login(request):
         return redirect('/auth/login/?status=1')
     elif len(usuario) > 0:
         request.session['usuario'] = usuario[0].id
-        return redirect('/paginaInicial/')
+        return redirect('paginaInicial')
     
 def paginaInicial(request):
     return render(request, 'paginaInicial.html')
