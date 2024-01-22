@@ -1,0 +1,76 @@
+body {
+    background: #161F33;
+    margin: 0;
+}
+
+.container {
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    position: relative;
+    width: 35%;
+    margin-bottom: 3%;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0px;
+    margin-bottom: 10px;
+    background: #8F9EBD ;
+    color: #fff;
+    font-size: 20px;
+    
+}
+
+.leftcontainer {
+    margin-top: 2%;
+    margin-left: 4%;
+    display: flex; 
+    align-items: center;
+    max-width: 50%;
+    margin-bottom: 1%;
+}
+
+img {
+    margin-right: 10px;
+}
+
+label {
+    color: white;
+    margin-left: 2%;
+    font-size: 20px;
+}
+
+input {
+    margin-left: 3%;
+    width: 100%;
+    padding: 15px;
+    background-color: #374157;
+    color: white;
+    font-size: 20px;
+}
+
+input::placeholder{
+    font-size: 20px;
+}
+
+
+.tarefabtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    padding: 15px 0px;
+    margin-bottom: 10px;
+    margin-left: 10%;
+    outline: none;
+    background: #374157 ;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}

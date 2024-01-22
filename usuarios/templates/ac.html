@@ -4,8 +4,39 @@
 {% block 'titulo'%} Algoritmos de Computação {% endblock %}
 
 {% block 'conteudo' %} 
-<link rel="stylesheet" type="text/css" href="{% static 'acdisciplina.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'acssdisciplina.css' %}">
 
-<h1 style="color: white;">Algoritmos de Computação</h1>
+<div class="container">
+    <a class="btn">Algoritmo de Computadores</a>
+</div>
+
+<div class="leftcontainer">
+    <img src="{% static 'tarefa.png' %}" width="30">
+    <label>Tarefa</label>
+    <img src="{% static 'plus.png' %}" width="30" style="margin-left: 80%;">
+</div>
+
+<div class="leftcontainer">
+    <a class="tarefabtn" href="{% static 'disciplina.css' %}">Estudar Estruturas condicionais</a>
+</div>
+
+<div class="leftcontainer">
+    <a class="tarefabtn" href="{% static 'disciplina.css' %}">Resolver Lista de Exercícios</a>
+</div>
+
+<div class="leftcontainer">
+    <img src="{% static 'anexo.png' %}" width="30">
+    <label>Anexar arquivo</label>
+</div>
+
+<div class="leftcontainer">
+    <img src="{% static 'anotacoes.png' %}" width="30">
+    <label>Anotações</label>
+</div>
+
+<div class="container" style="margin-left: 32%;">
+    <a href="{% url 'disciplina' %}" style="margin-right: 50%; color: white">CANCELAR</a>
+    <a href="{% url 'disciplina' %}" style="color: #85A7EF">CONFIRMAR</a>
+</div>
 
 {% endblock %}
