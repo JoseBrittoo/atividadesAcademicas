@@ -1,0 +1,140 @@
+body {
+    background: #161F33; /* Cor de fundo azul escuro da página inicial */
+    margin: 0;
+}
+.container {
+    display: flex;
+}
+.sidebar {
+    width: 0;
+    height: 100%;
+    background: #8F9EBD; 
+    position: fixed;
+    overflow-x: hidden;
+    transition: 0.5s; /* Adiciona uma transição suave para a animação de abertura/fechamento */
+    top: 0; 
+    left: 0; 
+}
+.user-profile {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    flex-direction: column; /* Altera a direção para coluna */
+}
+.user-profile img {
+    width: 80px; /* Ajuste de largura do perfil */
+    height: 80px; 
+    border-radius: 50%; /* Para criar uma imagem de perfil circular */
+    margin-right: 10px; /* Espaço entre a imagem e o texto */
+}
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+.user-name {
+    color: #fff;
+    font-size: 16px;
+    margin-top: 5px; /* Espaço entre a imagem e o nome do usuário */
+}
+.user-profile span { /*Relacionado ao nome de usuario*/
+    color: #fff;
+    font-size: 18px;
+}
+.pesquisar {
+    width: 18px; /* Ajuste a largura conforme necessário */
+    height: 16px; /* Ajuste a altura conforme necessário */
+    background-image: url('icon/pesquisar.jpg'); /* Substitua pelo caminho correto para a imagem */
+    background-size: cover; /* Ajusta o tamanho da imagem para cobrir o espaço do elemento */
+    display: inline-block; /* Permite ajustar largura e altura */
+    margin-right: 5px; /* Adiciona espaço à direita do ícone */
+}
+.disciplinas {
+    width: 18px; /* Ajuste a largura conforme necessário */
+    height: 16px; /* Ajuste a altura conforme necessário */
+    background-image: url('icon/disciplinas.jpg'); /* Substitua pelo caminho correto para a imagem */
+    background-size: cover; /* Ajusta o tamanho da imagem para cobrir o espaço do elemento */
+    display: inline-block; /* Permite ajustar largura e altura */
+    margin-right: 5px; /* Adiciona espaço à direita do ícone */
+}
+.grade {
+    width: 18px; /* Ajuste a largura conforme necessário */
+    height: 16px; /* Ajuste a altura conforme necessário */
+    background-image: url('icon/grade.jpg'); /* Substitua pelo caminho correto para a imagem */
+    background-size: cover; /* Ajusta o tamanho da imagem para cobrir o espaço do elemento */
+    display: inline-block; /* Permite ajustar largura e altura */
+    margin-right: 5px; /* Adiciona espaço à direita do ícone */
+}
+.menu-btn {
+    cursor: pointer;
+    padding: 20px;
+    position: fixed;
+    z-index: 1; 
+    top: 0; 
+    left: 0; /* Posiciona o botão no lado esquerdo da página */
+}
+.menu-btn span {
+    height: 3px;
+    width: 25px;
+    background: #fff;
+    margin-bottom: 5px;
+    display: block;
+}
+.menu-list {
+    list-style: none;
+    padding: 20px 0;
+    margin: 0;
+}
+.sidebar .menu-list a {
+    text-decoration: none;
+    background: #000;/* Mudando a cor para preto */
+    padding: 10px;
+    display: flex; /* Para alinhar o ícone e o texto na vertical */
+    align-items: center; /* Alinha o conteúdo verticalmente */
+    transition: background 0.3s;
+}
+.menu-list a:hover {
+    background: #2c0fa1;
+}
+
+.submenu-list {
+    list-style: none;
+    padding: 0;
+    margin-left: 20px;
+}
+
+.menu-list a i {
+    margin-right: 8px; /* Espaço entre ícone e texto */
+}
+
+@media screen and (min-width: 768px) {
+    .content {
+        margin-left: 200px;
+    }
+    
+    .sidebar {
+        width: 200px; /*largura da barra lateral*/
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 0; /* Garante que a barra lateral está fechada em telas menores inicialmente */
+        height: 100%;
+        position: fixed;
+        overflow-x: hidden;
+        transition: 0.5s;
+    }
+
+    .menu-list {
+        display: none; /* Oculta a lista de funcionalidades em telas menores */
+    }
+
+    .menu-list.active {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .menu-btn {
+        display: flex;
+    }
+}

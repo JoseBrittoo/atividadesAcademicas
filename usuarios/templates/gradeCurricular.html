@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'titulo'%} gradeCurricular {% endblock %}
+
+{% block conteudo %}
+    <link rel="stylesheet" type="text/css" href="{% static 'gradeCurricular.css' %}">
+    {% include 'menu.html' %}
+    <div class="container">
+        <h2>Grade Curricular</h2>
+
+        <div class="grade">
+            {% for periodo in grade_curricular %}
+                <div class="periodo">
+                    <div class="titulo-periodo">
+                        <h3>Período {{ periodo.numero }}</h3>
+                    </div>
+                    <div class="disciplinas">
+                        {% for disciplina in periodo.disciplinas %}
+                            <div class="disciplina">
+                                <p>{{ disciplina.nome }}</p>
+                                <!-- Adicione mais detalhes da disciplina conforme necessário -->
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
