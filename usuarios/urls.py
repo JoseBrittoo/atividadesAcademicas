@@ -14,5 +14,6 @@ urlpatterns = [
     path('mc/', views.mc, name = 'mc'),
     path('paginaInicial/', views.paginaInicial, name = 'paginaInicial'),
     path('menu/', views.menu, name = 'menu'),
-    path('gradeCurricular/', views.gradeCurricular, name = 'gradeCurricular')
+    path('gradeCurricular/', views.gradeCurricular, name = 'gradeCurricular'),
+    path('novatarefa/', views.novatarefa, name = 'novatarefa')
 ]

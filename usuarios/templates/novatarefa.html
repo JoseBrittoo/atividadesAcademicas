@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'titulo'%} Nova Tarefa {% endblock %}
+
+{% block 'conteudo' %} 
+<link rel="stylesheet" type="text/css" href="{% static 'novatarefa.css' %}">
+
+<div class="leftcontainer">
+    <a href="{% url 'ac' %}">
+        <img src="{% static 'voltar.png' %}" width="30" alt="Voltar para disciplina">
+    </a>
+    <h1> Nova Tarefa</h1>
+</div>
+
+<div class="leftcontainer">
+    <input type="text" placeholder="Tarefa">
+</div>
+
+<div class="leftcontainer">
+    <img src="{% static 'descricao.png' %}" width="30">
+    <label>Descrição</label>
+</div>
+
+<div class="leftcontainer">
+    <input type="text" style="margin-left: 10%; margin-right: 10%; padding: 4%">
+</div>
+
+<div class="leftcontainer">
+    <img src="{% static 'data.png' %}" width="30">
+    <label>Data</label>
+    <a class="btn"style="margin-left: 60%;">Hoje</a>
+</div>
+
+<div class="leftcontainer">
+    <img src="{% static 'subitens.png' %}" width="30">
+    <label>Subitens</label>
+</div>
+
+<div class="leftcontainer">
+    <img src="{% static 'prioridade.png' %}" width="30">
+    <label>Prioridade</label>
+    <a class="btn"style="margin-left: 53%;">Normal</a>
+</div>
+
+<div class="container" style="margin-left: 20%; margin-top: 5%;">
+    <a href="{% url 'disciplina' %}" style="margin-right: 50%; color: white">CANCELAR</a>
+    <a href="{% url 'disciplina' %}" style="color: #85A7EF">CONFIRMAR</a>
+</div>
+
+{% endblock %}

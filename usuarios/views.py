@@ -35,6 +35,12 @@ def mc(request):
     status = request.GET.get('status')
     return render(request, 'mc.html', {'status': status})
 
+def novatarefa(request):
+    status = request.GET.get('status')
+    return render(request, 'novatarefa.html', {'status': status})
+
+
+
 def valida_cadastro(request):
     email = request.POST.get('email')
     senha = request.POST.get('senha')
