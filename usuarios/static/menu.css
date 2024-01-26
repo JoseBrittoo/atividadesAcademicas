@@ -57,6 +57,13 @@ nav.menu.expandir{
     border-radius: 50%;
     overflow: hidden;
     margin-bottom: 10px;
+    background-size: cover;
+}
+
+.profile-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .profile-name {
