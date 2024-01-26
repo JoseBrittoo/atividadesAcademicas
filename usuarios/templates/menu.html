@@ -5,40 +5,52 @@
 
 {% block 'conteudo' %} 
 <link rel="stylesheet" type="text/css" href="{% static 'menu.css' %}">
-<div class="container">
-    <div class="sidebar" id="sidebar">
-        <div class="menu-btn" onclick="toggleSidebar()">
-            <!-- Ícone de menu com três traços -->
-            <span></span>
-            <span></span>
-            <span></span>
+    <nav class="menu">
+
+        <div class="btn-expandir">
+            <i class="bi bi-list" id="btn-exp"></i>
         </div>
-        <div class="user-profile">
-            <img src="{% static 'user-profile.jpg' %}" alt="Perfil do Usuário">
-            <div class="user-details">
-                <span class="user-name">Nome do Usuário</span>
-                <!-- Adicionar informações do usuário aqui, se necessário -->
+
+        <div class="profile-container">
+            <div class="profile-circle">
+                <img src="{% static 'user-profile.jpg' %}" alt="user">
+            </div>
+            <div class="profile-name">
+                <p>Nome do usuário</p>
             </div>
         </div>
-        <ul class="submenu-list">
-            <li><a href="#"><i class="icon pesquisar"></i>Pesquisa</a></li>
-            <li><a href="#"><i class="icon configura"></i>Configuração</a></li>
-            <ul class="submenu-list">
-               <li><a href="#">Excluir Conta</a></li>
-               <li><a href="#">Trocar Senha</a></li>
-            </ul>
-            <li><a href="#"><i class="icon cronograma"></i>Cronograma</a></li>
-            <li><a href="#"><i class="icon disciplinas"></i>Disciplinas</a></li>
-            <li><a href="{% url 'gradeCurricular' %}"><i class="icon grade"></i>Grade Curricular</a></li>
-        </ul>
-    </div>
-</div>
 
-<script>
-    function toggleSidebar() {
-        console.log("Clicou!");
-        var sidebar = document.getElementById("sidebar");
-        sidebar.style.width = (sidebar.style.width === "200px") ? "0" : "200px";
-    }
-</script>
+        <ul>
+            <li class="item">
+                <a href="">
+                    <span class="icon"><i class="bi bi-search"></i></span>
+                    <span class="link">Pesquisar</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="">
+                    <span class="icon"><i class="bi bi-gear"></i>
+                    </span>
+                    <span class="link">Configuração</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="">
+                    <span class="icon"><i class="bi bi-calendar-range"></i>
+                    </span>
+                    <span class="link">Cronograma</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <script>
+        var btnExp = document.getElementById('btn-exp');
+        var menuS = document.querySelector('.menu');
+
+        btnExp.addEventListener('click', function(){
+            menuS.classList.toggle('expandir');
+        });
+    </script>
+
 {% endblock %}
