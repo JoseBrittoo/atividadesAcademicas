@@ -21,5 +21,8 @@ urlpatterns = [
     path('lista_eventos/', views.lista_eventos, name = 'lista_eventos'),
     path('criar_evento/', views.criar_evento, name = 'criar_evento'),
     path('atualizar_evento/<evento_id>', views.atualizar_evento, name = 'atualizar_evento'),
-    path('deletar_evento/<evento_id>', views.deletar_evento, name = 'deletar_evento')
+    path('deletar_evento/<evento_id>', views.deletar_evento, name = 'deletar_evento'),
+    path('grade_curricular/', views.gradeCurricular, name='grade_curricular'),
+    path('adicionar_periodo/', views.adicionarPeriodo, name='adicionar_periodo'),
+    path('adicionar_disciplina/', views.adicionarDisciplina, name='adicionar_disciplina')
 ]

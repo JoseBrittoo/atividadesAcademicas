@@ -5,8 +5,8 @@ from django.shortcuts import redirect
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
-from .models import Evento
-from .forms import EventoForm
+from .models import Evento, Periodo, Disciplina
+from .forms import EventoForm, PeriodoForm, DisciplinaForm
 from django.contrib.auth.decorators import login_required 
 
 
@@ -94,24 +94,10 @@ def valida_login(request):
         return redirect('paginaInicial')
     
 def gradeCurricular(request):
-    grade_curricular = [
-        {
-            'numero': 1,
-            'disciplinas': [
-                {'nome': 'Disciplina 1.1'},
-                {'nome': 'Disciplina 1.2'},
-            ]
-        },
-        {
-            'numero': 2,
-            'disciplinas': [
-                {'nome': 'Disciplina 2.1'},
-                {'nome': 'Disciplina 2.2'},
-            ]
-        },
-    ]
-    return render(request, 'gradeCurricular.html', {'grade_curricular': grade_curricular})
-
+    periodos = Periodo.objects.all()
+    periodo_form = PeriodoForm()  # Adicionei isso para garantir que o formulário seja passado para o template
+    disciplina_form = DisciplinaForm()  # Adicionei isso para garantir que o formulário seja passado para o template
+    return render(request, 'gradeCurricular.html', {'periodos': periodos, 'periodo_form': periodo_form, 'disciplina_form': disciplina_form})
 
 def calendario(request, year=datetime.now().year, month=datetime.now().strftime('%B')):
 
@@ -171,3 +157,25 @@ def deletar_evento(request, evento_id):
     evento = Evento.objects.get(pk=evento_id)
     evento.delete()
     return redirect('lista_eventos')
+
+def adicionarPeriodo(request):
+    if request.method == 'POST':
+        periodo_form = PeriodoForm(request.POST)
+        if periodo_form.is_valid():
+            periodo_form.save()
+            return redirect('grade_curricular')
+    else:
+        periodo_form = PeriodoForm()
+
+    return render(request, 'adicionar_periodo.html', {'periodo_form': periodo_form})
+
+def adicionarDisciplina(request):
+    if request.method == 'POST':
+        disciplina_form = DisciplinaForm(request.POST)
+        if disciplina_form.is_valid():
+            disciplina_form.save()
+            return redirect('grade_curricular')
+    else:
+        disciplina_form = DisciplinaForm()
+
+    return render(request, 'adicionar_disciplina.html', {'disciplina_form': disciplina_form})

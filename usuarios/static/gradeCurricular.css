@@ -1,3 +1,7 @@
+body {
+    background-color: #161F33; /* Cor de fundo padrão */
+    color: white; /* Cor do texto padrão */
+}
 .container {
     max-width: 800px;
     margin: 0 auto;
@@ -5,17 +9,20 @@
 
 .grade {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column; /* Alteração para coluna */
+    align-items: center; /* Centralizar coluna */
     background-color: #3498db;
     padding: 10px;
     border-radius: 10px;
+    margin-top: 20px; /* Espaço entre a grade e outros elementos */
 }
 
 .periodo {
     background-color: #2980b9;
     padding: 10px;
-    margin: 5px;
+    margin: 10px 0; /* Espaço entre os períodos */
     border-radius: 5px;
+    width: 100%; /* Preencher a largura da coluna */
 }
 
 .titulo-periodo {
@@ -29,8 +36,8 @@
 }
 
 .disciplina {
-    background-color: #ecf0f1;
-    padding: 5px;
-    margin: 3px 0;
-    border-radius: 3px;
+    background-color: #34495e; /* Cor mais escura para disciplinas */
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
 }

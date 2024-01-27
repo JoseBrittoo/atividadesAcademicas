@@ -16,3 +16,30 @@ class Evento(models.Model):
 
     def __str__(self) -> str:
         return self.nome
+    
+#Isso é relacionado a grade curricular
+class Disciplina(models.Model):
+    nome = models.CharField(max_length=100)
+    def __str__(self):
+        return self.nome
+    
+class Periodo(models.Model):
+    numero = models.IntegerField()
+    disciplinas = models.ManyToManyField(Disciplina)
+
+    def __str__(self):
+        return f'Período {self.numero}'
+    
+class GradeCurricular(models.Model):
+    nome_curso = models.CharField(max_length=100)
+    duracao_curso = models.IntegerField()
+    descricao_curso = models.TextField()
+
+    periodos = models.ManyToManyField(Periodo)
+
+    def __str__(self):
+        # Retorne uma representação da grade curricular, como o nome do curso
+        # Por exemplo:
+        # return self.nome_curso if self.nome_curso else "Grade Curricular"
+        return "Grade Curricular"
+    
