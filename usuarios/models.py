@@ -18,14 +18,14 @@ class Evento(models.Model):
         return self.nome
     
 #Isso é relacionado a grade curricular
-class Disciplina(models.Model):
+class DisciplinaG(models.Model):
     nome = models.CharField(max_length=100)
     def __str__(self):
         return self.nome
     
 class Periodo(models.Model):
     numero = models.IntegerField()
-    disciplinas = models.ManyToManyField(Disciplina)
+    disciplinas = models.ManyToManyField(DisciplinaG)
 
     def __str__(self):
         return f'Período {self.numero}'
@@ -43,3 +43,9 @@ class GradeCurricular(models.Model):
         # return self.nome_curso if self.nome_curso else "Grade Curricular"
         return "Grade Curricular"
     
+class Disciplina(models.Model):
+    nome_disciplina = models.CharField(max_length = 100)
+    descricao_disciplina = models.TextField(blank = True)
+
+    def __str__(self) -> str:
+        return self.nome_disciplina

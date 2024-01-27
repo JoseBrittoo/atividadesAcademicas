@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Usuario
-from django.shortcuts import redirect
+from .models import Usuario, Evento, Disciplina
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
-from .models import Evento, Periodo, Disciplina
+from .models import Evento, Periodo
 from .forms import EventoForm, PeriodoForm, DisciplinaForm
 from django.contrib.auth.decorators import login_required 
 
@@ -179,3 +178,38 @@ def adicionarDisciplina(request):
         disciplina_form = DisciplinaForm()
 
     return render(request, 'adicionar_disciplina.html', {'disciplina_form': disciplina_form})
+
+def lista_disciplina(request):
+    disciplina_lista = Disciplina.objects.all().order_by('nome_disciplina')
+    return render(request, 'lista_disciplina.html', {'disciplina_lista': disciplina_lista})
+
+def cadastro_disciplina(request):
+    submitted = False
+    if request.method == 'POST':
+        form = DisciplinaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/auth/cadastro_disciplina?submitted=True')
+    else:
+        form = DisciplinaForm
+        if 'submitted' in request.GET:
+            submitted = True
+
+    form = DisciplinaForm
+    return render(request, 'cadastro_disciplina.html', {'form': form, 'submitted': submitted})
+
+def atualizar_disciplina(request, disciplina_id):
+    disciplina = Disciplina.objects.get(pk=disciplina_id)
+    form = DisciplinaForm(request.POST or None, instance=disciplina)
+
+    if form.is_valid():
+        form.save()
+        return redirect('lista_disciplinas')
+
+    return render(request, 'atualizar_disciplina.html', {'disciplina': disciplina, 
+    'form': form})
+
+def deletar_disciplina(request, disciplina_id):
+    disciplina = Disciplina.objects.get(pk=disciplina_id)
+    disciplina.delete()
+    return redirect('lista_disciplina')

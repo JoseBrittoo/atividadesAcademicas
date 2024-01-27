@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Evento, Disciplina, Periodo, GradeCurricular
+from .models import Evento, Disciplina, DisciplinaG, Periodo, GradeCurricular
 
 class EventoForm(ModelForm):
     class Meta:
@@ -19,9 +19,9 @@ class EventoForm(ModelForm):
             'descricao': forms.Textarea(attrs={'class': 'form-control'}),
         }
 
-class DisciplinaForm(ModelForm):
+class DisciplinaGForm(ModelForm):
     class Meta:
-        model = Disciplina
+        model = DisciplinaG
         fields = ['nome']
         labels = {'nome': 'Nome da Disciplina'}
         widgets = {'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': ''})}
@@ -39,4 +39,16 @@ class GradeCurricularForm(ModelForm):
         fields = ['periodos']
         labels = {'periodos': 'Períodos'}
         widgets = {'periodos': forms.CheckboxSelectMultiple}
-        
+ 
+class DisciplinaForm(ModelForm):
+    class Meta:
+        model = Disciplina
+        fields = ['nome_disciplina', 'descricao_disciplina']
+        labels = {
+            'nome_disciplina': '',
+            'descricao_disciplina': 'Descrição'
+        }
+        widgets = {
+            'nome_disciplina': forms.TextInput(attrs={'class': 'input', 'placeholder': 'Disciplina'}),
+            'descricao_disciplina': forms.TextInput(attrs={'class': 'input descricao-input', 'placeholder': '', 'style': 'margin-left: 10%; margin-right: 10%; padding: 4%'}),
+        }

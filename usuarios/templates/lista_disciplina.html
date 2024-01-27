@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'titulo'%} Disciplina {% endblock %}
+
+{% block 'conteudo' %} 
+{% include 'menu.html' %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'disciplina.css' %}">
+
+<div class="container">
+
+    <div class="content">
+
+        <form>
+            <h1>DISCIPLINAS GRADUAÇÃO</h1>
+
+            <label>Nome:</label>
+            {% for disciplina in disciplina_lista %} 
+            <a href="{% url 'ac' %}" class="btn">{{ disciplina }}</a>
+            <a href="{% url 'deletar_disciplina' disciplina_id=disciplina.id %}">
+                Deletar
+            </a>
+            <br>
+            <br>
+            {% endfor %}
+            <br>
+            <br>
+            <a href="{% url 'cadastro_disciplina' %}">Cadastrar Disciplina</a>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

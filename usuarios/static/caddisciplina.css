@@ -7,6 +7,14 @@
     margin-bottom: 1%;
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
 body {
     background: #161F33;
 }
