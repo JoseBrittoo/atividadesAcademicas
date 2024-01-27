@@ -16,3 +16,10 @@ class Evento(models.Model):
 
     def __str__(self) -> str:
         return self.nome
+    
+class Disciplina(models.Model):
+    nome_disciplina = models.CharField(max_length = 100)
+    descricao_disciplina = models.TextField(blank = True)
+
+    def __str__(self) -> str:
+        return self.nome_disciplina

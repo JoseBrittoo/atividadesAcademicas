@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'titulo'%} Cadastro Disciplina {% endblock %}
+
+{% block 'conteudo' %} 
+<link rel="stylesheet" type="text/css" href="{% static 'caddisciplina.css' %}">
+
+<div class="leftcontainer">
+    <a href="{% url 'lista_disciplina' %}">
+        <img src="{% static 'voltar.png' %}" width="30" alt="Voltar para disciplina">
+    </a>
+    <h1> Nova Disciplina</h1>
+</div>
+
+{% if submitted %}
+    <p style="color: white; margin-left: 3%;"> A disciplina foi criada com sucesso! </p>
+    {% else %}
+    <form action="" method="POST">
+        {% csrf_token %}
+    <div class="leftcontainer">
+        {{ form.nome_disciplina }}
+    </div>
+    
+    <div class="leftcontainer">
+        <img src="{% static 'descricao.png' %}" width="30">
+        <label for="{{ form.descricao_disciplina.id_for_label }}">Descrição</label>
+    </div>
+    <div class="leftcontainer">
+        {{ form.descricao_disciplina }}
+    </div>
+    <div class="container">
+        <input type="submit" value="Cadastrar" class="btn btn-secondary" style="background-color: #8F9EBD; margin-top: 6%; width: 20%;">
+    </div>
+</form>
+        {% endif %}
+    
+
+
+{% endblock %}
