@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block 'titulo'%} Calendario {% endblock %}
+
+{% block 'conteudo' %}
+{% include 'menu.html' %} 
+<center>
+<h1> Hello!! {{ year }} {{ month }}</h1>
+
+São {{ time }}
+<br> </br>
+{{ cal|safe }}
+
+
+</center>
+
+{% endblock %}

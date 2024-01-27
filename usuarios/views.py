@@ -1,7 +1,18 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Usuario
 from django.shortcuts import redirect
+import calendar
+from calendar import HTMLCalendar
+from datetime import datetime
+from .models import Evento
+from .forms import EventoForm
+from django.contrib.auth.decorators import login_required 
+
+
+
+def home(request):
+    return render(request, 'home.html')
 
 def login(request):
     status = request.GET.get('status')
@@ -39,7 +50,11 @@ def novatarefa(request):
     status = request.GET.get('status')
     return render(request, 'novatarefa.html', {'status': status})
 
+def paginaInicial(request):
+    return render(request, 'paginaInicial.html')
 
+def menu(request):
+    return render(request, 'menu.html')
 
 def valida_cadastro(request):
     email = request.POST.get('email')
@@ -65,7 +80,7 @@ def valida_cadastro(request):
         return redirect('/auth/cadastro/?status=0')
     except:
         return redirect('/auth/cadastro/?status=4')
-
+    
 def valida_login(request):
     email = request.POST.get('email')
     senha = request.POST.get('senha')  
@@ -78,12 +93,6 @@ def valida_login(request):
         request.session['usuario'] = usuario[0].id
         return redirect('paginaInicial')
     
-def paginaInicial(request):
-    return render(request, 'paginaInicial.html')
-
-def menu(request):
-    return render(request, 'menu.html')
-
 def gradeCurricular(request):
     grade_curricular = [
         {
@@ -104,5 +113,61 @@ def gradeCurricular(request):
     return render(request, 'gradeCurricular.html', {'grade_curricular': grade_curricular})
 
 
+def calendario(request, year=datetime.now().year, month=datetime.now().strftime('%B')):
 
+    month_number = list(calendar.month_name).index(month)
+    month_number = int(month_number)
+    month = month.capitalize()
+    cal = HTMLCalendar().formatmonth(year, month_number)
 
+    #ano atual
+    now = datetime.now() 
+
+    #hora atual
+    time = now.strftime("%H:%M %p")
+
+    return render(request, 'calendario.html', 
+                  {
+                    'year': year,
+                    'month': month,
+                    'month_number': month_number,
+                    'cal': cal,
+                    'time': time
+                   })
+
+#@login_required(login_url='/auth/login/')
+def lista_eventos(request):
+    eventos_lista = Evento.objects.all().order_by('data_evento')
+    return render(request, 'lista_eventos.html', {'eventos_lista': eventos_lista})
+
+#@login_required(login_url='/auth/login/')
+def criar_evento(request):
+    submitted = False
+    if request.method == 'POST':
+        form = EventoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/auth/criar_evento?submitted=True')
+    else:
+        form = EventoForm
+        if 'submitted' in request.GET:
+            submitted = True
+
+    form = EventoForm
+    return render(request, 'criar_evento.html', {'form': form, 'submitted': submitted})
+
+def atualizar_evento(request, evento_id):
+    evento = Evento.objects.get(pk=evento_id)
+    form = EventoForm(request.POST or None, instance=evento)
+
+    if form.is_valid():
+        form.save()
+        return redirect('lista_eventos')
+
+    return render(request, 'atualizar_evento.html', {'evento': evento, 
+    'form': form})
+
+def deletar_evento(request, evento_id):
+    evento = Evento.objects.get(pk=evento_id)
+    evento.delete()
+    return redirect('lista_eventos')

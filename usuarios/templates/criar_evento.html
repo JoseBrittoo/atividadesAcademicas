@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block 'titulo'%} Criar evento {% endblock %}
+
+{% block 'conteudo' %}
+{% include 'menu.html' %} 
+<div class="container">
+    <h1> Criar Evento </h1>
+{% if submitted %}
+    <p> O evento foi criado com sucesso! </p>
+    {% else %}
+
+        <form action="" method="POST">
+            {% csrf_token %}
+             
+            {{ form.as_p }}
+            <input type="submit" value="Criar evento" class="btn btn-secondary">
+        </form>
+
+{% endif %}
+</div>
+
+{% endblock %}

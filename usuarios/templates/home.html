@@ -1,0 +1,12 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block 'titulo'%} Home {% endblock %}
+{% block 'conteudo' %}
+    <link rel="stylesheet" type="text/css" href= {% static 'home.css' %}>
+    <div class="text-center">
+        <div class="text-center">
+            <a class="btn btn-lilac mt-3" href="{% url 'cadastro' %}">Cadastro de Usuário</a>
+            <a class="btn btn-lilac mt-3" href="{% url 'login' %}">Login</a>
+        </div>
+{% endblock %}

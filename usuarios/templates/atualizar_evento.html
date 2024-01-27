@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'titulo'%} Atualizar evento {% endblock %}
+{% block 'conteudo' %} 
+{% include 'menu.html' %}
+<div class="container">
+    <h1>Atualizar evento</h1>
+    <br>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Atualizar"  class="btn btn-secondary">
+</div>
+
+{% endblock %}
