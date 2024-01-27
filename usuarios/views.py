@@ -4,12 +4,8 @@ from .models import Usuario, Evento, Disciplina
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
-<<<<<<< HEAD
 from .models import Evento, Periodo
-from .forms import EventoForm, PeriodoForm, DisciplinaForm
-=======
-from .forms import EventoForm, DisciplinaForm
->>>>>>> 1a9764679e9528e959f3cac690a9fd57da9e1c08
+from .forms import EventoForm, PeriodoForm, DisciplinaGForm, DisciplinaForm
 from django.contrib.auth.decorators import login_required 
 
 
@@ -99,7 +95,7 @@ def valida_login(request):
 def gradeCurricular(request):
     periodos = Periodo.objects.all()
     periodo_form = PeriodoForm()  # Adicionei isso para garantir que o formulário seja passado para o template
-    disciplina_form = DisciplinaForm()  # Adicionei isso para garantir que o formulário seja passado para o template
+    disciplina_form = DisciplinaGForm()  # Adicionei isso para garantir que o formulário seja passado para o template
     return render(request, 'gradeCurricular.html', {'periodos': periodos, 'periodo_form': periodo_form, 'disciplina_form': disciplina_form})
 
 def calendario(request, year=datetime.now().year, month=datetime.now().strftime('%B')):
@@ -161,7 +157,6 @@ def deletar_evento(request, evento_id):
     evento.delete()
     return redirect('lista_eventos')
 
-<<<<<<< HEAD
 def adicionarPeriodo(request):
     if request.method == 'POST':
         periodo_form = PeriodoForm(request.POST)
@@ -175,17 +170,15 @@ def adicionarPeriodo(request):
 
 def adicionarDisciplina(request):
     if request.method == 'POST':
-        disciplina_form = DisciplinaForm(request.POST)
+        disciplina_form = DisciplinaGForm(request.POST)
         if disciplina_form.is_valid():
             disciplina_form.save()
             return redirect('grade_curricular')
     else:
-        disciplina_form = DisciplinaForm()
+        disciplina_form = DisciplinaGForm()
 
     return render(request, 'adicionar_disciplina.html', {'disciplina_form': disciplina_form})
 
-=======
->>>>>>> 1a9764679e9528e959f3cac690a9fd57da9e1c08
 def lista_disciplina(request):
     disciplina_lista = Disciplina.objects.all().order_by('nome_disciplina')
     return render(request, 'lista_disciplina.html', {'disciplina_lista': disciplina_lista})
