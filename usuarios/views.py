@@ -4,8 +4,12 @@ from .models import Usuario, Evento, Disciplina
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
+<<<<<<< HEAD
 from .models import Evento, Periodo
 from .forms import EventoForm, PeriodoForm, DisciplinaForm
+=======
+from .forms import EventoForm, DisciplinaForm
+>>>>>>> 1a9764679e9528e959f3cac690a9fd57da9e1c08
 from django.contrib.auth.decorators import login_required 
 
 
@@ -157,6 +161,7 @@ def deletar_evento(request, evento_id):
     evento.delete()
     return redirect('lista_eventos')
 
+<<<<<<< HEAD
 def adicionarPeriodo(request):
     if request.method == 'POST':
         periodo_form = PeriodoForm(request.POST)
@@ -179,6 +184,8 @@ def adicionarDisciplina(request):
 
     return render(request, 'adicionar_disciplina.html', {'disciplina_form': disciplina_form})
 
+=======
+>>>>>>> 1a9764679e9528e959f3cac690a9fd57da9e1c08
 def lista_disciplina(request):
     disciplina_lista = Disciplina.objects.all().order_by('nome_disciplina')
     return render(request, 'lista_disciplina.html', {'disciplina_lista': disciplina_lista})
