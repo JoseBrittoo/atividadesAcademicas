@@ -18,7 +18,7 @@ body {
     align-items: center;
     text-align: center;
     width: 100%;
-    padding: 30px 35px;
+    padding: 30px 40px;
     border-radius: 20px;
 }
 
@@ -60,10 +60,10 @@ body {
     color: #fff;
     font-size: 20px;
     cursor: pointer;
-    margin-bottom: 5%;
 }
 
 .content a {
     color: white;
+    
 }
 

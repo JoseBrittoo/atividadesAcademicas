@@ -18,7 +18,14 @@
             <label>Nome:</label>
             {% for disciplina in disciplina_lista %} 
             <a href="{% url 'ac' %}" class="btn">{{ disciplina }}</a>
+            <a href="{% url 'deletar_disciplina' disciplina_id=disciplina.id %}">
+                Deletar
+            </a>
+            <br>
+            <br>
             {% endfor %}
+            <br>
+            <br>
             <a href="{% url 'cadastro_disciplina' %}">Cadastrar Disciplina</a>
         </form>
     </div>
