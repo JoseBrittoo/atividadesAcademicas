@@ -6,17 +6,17 @@
 
 {% block 'conteudo' %}
 {% include 'menu.html' %} 
+<link rel="stylesheet" type="text/css" href="{% static 'criar_evento.css' %}">
 <div class="container">
     <h1> Criar Evento </h1>
 {% if submitted %}
     <p> O evento foi criado com sucesso! </p>
     {% else %}
-
         <form action="" method="POST">
             {% csrf_token %}
              
             {{ form.as_p }}
-            <input type="submit" value="Criar evento" class="btn btn-secondary">
+            <input type="submit" value="Criar evento" class="btn btn-outline-primary">
         </form>
 
 {% endif %}
