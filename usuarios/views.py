@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Usuario, Evento, Disciplina
 import calendar
@@ -29,9 +29,9 @@ def caddisciplina(request):
     status = request.GET.get('status')
     return render(request, 'caddisciplina.html', {'status': status})
 
-def ac(request):
-    status = request.GET.get('status')
-    return render(request, 'ac.html', {'status': status})
+def ac(request, disciplina_id):
+    disciplina = get_object_or_404(Disciplina, id=disciplina_id)
+    return render(request, 'ac.html', {'disciplina': disciplina})
 
 def al(request):
     status = request.GET.get('status')
