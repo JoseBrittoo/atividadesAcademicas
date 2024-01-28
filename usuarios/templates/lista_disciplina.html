@@ -24,6 +24,9 @@
             <a href="{% url 'deletar_disciplina' disciplina_id=disciplina.id %}">
                 Deletar
             </a>
+            <a href="{% url 'atualizar_disciplina' disciplina_id=disciplina.id %}">
+                | Alterar
+            </a>
             <br>
             <br>
             {% endfor %}

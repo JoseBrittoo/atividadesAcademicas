@@ -184,7 +184,7 @@ def atualizar_disciplina(request, disciplina_id):
 
     if form.is_valid():
         form.save()
-        return redirect('lista_disciplinas')
+        return redirect('lista_disciplina')
 
     return render(request, 'atualizar_disciplina.html', {'disciplina': disciplina, 
     'form': form})

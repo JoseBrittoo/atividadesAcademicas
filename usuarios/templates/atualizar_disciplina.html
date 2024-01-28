@@ -1,16 +1,42 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block 'titulo'%} Atualizar evento {% endblock %}
+{% block 'titulo'%} Cadastro Disciplina {% endblock %}
+
 {% block 'conteudo' %} 
-{% include 'menu.html' %}
-<div class="container">
-    <h1>Atualizar disciplina</h1>
-    <br>
+<link rel="stylesheet" type="text/css" href="{% static 'caddisciplina.css' %}">
+
+<div class="leftcontainer">
+    <a href="{% url 'lista_disciplina' %}">
+        <img src="{% static 'voltar.png' %}" width="30" alt="Voltar para disciplina">
+    </a>
+    <h1> Alterar Disciplina</h1>
+</div>
+
     <form action="" method="POST">
         {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Atualizar"  class="btn btn-secondary">
-</div>
+    <div class="leftcontainer">
+        {{ form.nome_disciplina }}
+    </div>
+    
+    <div class="leftcontainer">
+        <img src="{% static 'descricao.png' %}" width="30">
+        <label for="{{ form.descricao_disciplina.id_for_label }}">Descrição</label>
+    </div>
+    <div class="leftcontainer">
+        {{ form.descricao_disciplina }}
+    </div>
+    <div class="leftcontainer">
+        <img src="{% static 'descricao.png' %}" width="30">
+        <label for="{{ form.descricao_disciplina.id_for_label }}">Tarefa</label>
+    </div>
+    <div class="leftcontainer">
+        {{ form.tarefa_disciplina }}
+    </div>
+        <input type="submit" value="Alterar" class="btn btn-secondary" style="background-color: #8F9EBD; width: 20%; margin-top: 5%;">
+
+</form>
+    
+
 
 {% endblock %}

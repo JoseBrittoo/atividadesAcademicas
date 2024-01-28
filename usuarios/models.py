@@ -46,6 +46,7 @@ class GradeCurricular(models.Model):
 class Disciplina(models.Model):
     nome_disciplina = models.CharField(max_length = 100)
     descricao_disciplina = models.TextField(blank = True)
+    tarefa_disciplina = models.TextField(blank = True)
 
     def __str__(self) -> str:
         return self.nome_disciplina
