@@ -21,33 +21,13 @@ def cadastro(request):
     status = request.GET.get('status')
     return render(request, 'cadastro.html', {'status': status})
 
-def disciplina(request):
-    status = request.GET.get('status')
-    return render(request, 'disciplina.html', {'status': status})
-
-def caddisciplina(request):
-    status = request.GET.get('status')
-    return render(request, 'caddisciplina.html', {'status': status})
-
-def ac(request, disciplina_id):
+def acessar_disciplina(request, disciplina_id):
     disciplina = get_object_or_404(Disciplina, id=disciplina_id)
-    return render(request, 'ac.html', {'disciplina': disciplina})
+    return render(request, 'acessar_disciplina.html', {'disciplina': disciplina})
 
-def al(request):
+def nova_tarefa(request):
     status = request.GET.get('status')
-    return render(request, 'al.html', {'status': status})
-
-def md(request):
-    status = request.GET.get('status')
-    return render(request, 'md.html', {'status': status})
-
-def mc(request):
-    status = request.GET.get('status')
-    return render(request, 'mc.html', {'status': status})
-
-def novatarefa(request):
-    status = request.GET.get('status')
-    return render(request, 'novatarefa.html', {'status': status})
+    return render(request, 'nova_tarefa.html', {'status': status})
 
 def paginaInicial(request):
     return render(request, 'paginaInicial.html')

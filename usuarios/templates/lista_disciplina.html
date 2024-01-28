@@ -20,7 +20,7 @@
             <label>Nome:</label>
 
             {% for disciplina in disciplina_lista %} 
-            <a href="{% url 'ac' disciplina_id=disciplina.id %}" class="btn">{{ disciplina }}</a>
+            <a href="{% url 'acessar_disciplina' disciplina_id=disciplina.id %}" class="btn">{{ disciplina }}</a>
             <a href="{% url 'deletar_disciplina' disciplina_id=disciplina.id %}">
                 Deletar
             </a>
