@@ -1,13 +1,46 @@
 .row-striped:nth-of-type(odd){
     background-color: #efefef;
-    border-left: 4px #000000 solid;
+    border-left: 5px #000000 solid;
   }
   
   .row-striped:nth-of-type(even){
     background-color: #ffffff;
-    border-left: 4px #efefef solid;
+    border-left: 5px #bbb8b8 solid;
   }
   
   .row-striped {
-      padding: 15px 0;
+      padding: 10px 0;
   }
+
+.container h1{
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: #ffff;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.container h2{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.container h3{
+    font-size: 30px;
+    font-weight: bold;
+    color: #000000;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.list-inline fa-clock-o{
+    font-size: 20px;
+    color: #000000;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

@@ -1,35 +1,47 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block 'titulo'%} Atividades {% endblock %}
+{% block 'titulo'%} Eventos {% endblock %}
 
 {% block 'conteudo' %} 
-{% include 'menu.html' %}
-<link rel="stylesheet" type="text/css" href="{% static 'lista_eventos.css' %}">
+    {% include 'menu.html' %}
+    <link rel="stylesheet" type="text/css" href="{% static 'lista_eventos.css' %}">
 
-<div class="container"> 
-    <h1> Lista de Atividades </h1>
+    <div class="container"> 
+        <h1> Lista de Eventos </h1>
 
-    {% for evento in eventos_lista %} 
-        <div class="row row-striped">
-            <div class="col-2 text-right">
-                <h1 class="display-4"><span class="badge badge-secondary">{{ evento.data_evento.day }}</span></h1>
-                <h2>{{ evento.data_evento|date:"M" }}</h2>
-            </div>
-            <div class="col-10">
-                
-                <h3 class="text-uppercase"><strong>{{ evento }}</strong></h3>
-                <ul class="list-inline">
-                    <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ evento.data_evento|date:"l" }} </li>
-                    <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ evento.hora_evento|time:"g:i A" }} </li>
-                </ul>
-                <p> {{ evento.descricao}} </p>
-                <div class="card-footer text-muted">
-                  <a href="{% url 'atualizar_evento' evento_id=evento.id %}" class="btn btn-outline-info btn-sm ">Atualizar</a>
-                  <a href="{% url 'deletar_evento' evento_id=evento.id %}" class="btn btn-outline-danger btn-sm">Deletar</a>
-              </div>
-            </div>
+        <div class="text-right mb-3">
+            <a href="{% url 'criar_evento' %}" class="btn btn-outline-light">Criar Evento</a>
         </div>
-    {% endfor %}
-</div>
+
+        {% for evento in eventos_lista %} 
+            <div class="row row-striped">
+                <div class="col-2 text-right">
+                    <h1 class="display-4"><span class="badge badge-secondary">{{ evento.data_evento.day }}</span></h1>
+                    <h2>{{ evento.data_evento|date:"M" }}</h2>
+                </div>
+                <div class="col-10">
+                    
+                    <h3 class="text-uppercase"><strong>{{ evento }}</strong></h3>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <i class="fa fa-calendar-o" aria-hidden="true"></i> {{ evento.data_evento|date:"l" }} 
+                        </li>
+                        <li class="list-inline-item">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i> {{ evento.hora_evento|time:"g:i A" }} 
+                        </li>
+                    
+                    <p>{{ evento.descricao }}</p>
+                    
+                    <div class="card-footer text-muted">
+                        <div class="ml-right">
+                            <a href="{% url 'atualizar_evento' evento_id=evento.id %}" class="btn btn-outline-info btn-sm">Atualizar</a>
+                            <a href="{% url 'deletar_evento' evento_id=evento.id %}" class="btn btn-outline-danger btn-sm">Deletar</a>
+                        </div>
+                    </div>
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
