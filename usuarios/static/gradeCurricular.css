@@ -1,6 +1,6 @@
 body {
     background-color: #161F33; /* Cor de fundo padrão */
-    color: white; /* Cor do texto padrão */
+    color: rgb(139, 20, 20); /* Cor do texto padrão */
 }
 .container {
     max-width: 800px;

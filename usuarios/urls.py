@@ -1,5 +1,7 @@
 from django.urls import path 
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('home/', views.home, name = 'home'),
@@ -9,6 +11,8 @@ urlpatterns = [
     path('valida_login/', views.valida_login, name = 'valida_login'),
     path('disciplina/', views.disciplina, name = 'disciplina'),
     path('caddisciplina/', views.caddisciplina, name = 'caddisciplina'),
+    #Adicionado para ir direto para anexar arquivo
+    path('caddisciplina/anexar-arquivo/<int:disciplina_id>/', views.anexar_arquivo, name='anexar_arquivo'),
     path('ac/', views.ac, name = 'ac'),
     path('al/', views.al, name = 'al'),
     path('md/', views.md, name = 'md'),
@@ -26,7 +30,10 @@ urlpatterns = [
     path('cadastro_disciplina', views.cadastro_disciplina, name = 'cadastro_disciplina'),
     path('atualizar_disciplina/<disciplina_id>', views.atualizar_disciplina, name = 'atualizar_disciplina'),
     path('deletar_disciplina/<disciplina_id>', views.deletar_disciplina, name = 'deletar_disciplina'),
-    path('grade_curricular/', views.gradeCurricular, name='grade_curricular'),
+    #path('grade_curricular/', views.gradeCurricular, name='grade_curricular'),
     path('adicionar_periodo/', views.adicionarPeriodo, name='adicionar_periodo'),
-    path('adicionar_disciplina/', views.adicionarDisciplina, name='adicionar_disciplina')
+    path('adicionar_disciplina/', views.adicionarDisciplina, name='adicionar_disciplina'),
+    path('anexar_arquivo/<int:disciplina_id>/', views.anexar_arquivo, name='anexar_arquivo'),
+    path('auth/anexar_arquivo/', views.anexar_arquivo, name='anexar_arquivo_default'),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

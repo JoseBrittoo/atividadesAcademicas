@@ -4,46 +4,46 @@
 {% block 'titulo'%} Grade Curricular {% endblock %}
 
 {% block conteudo %}
-    <link rel="stylesheet" type="text/css" href="{% static 'gradeCurricular.css' %}">
-    {% include 'menu.html' %}
-    <div class="container">
-        <h2>Grade Curricular</h2>
+<link rel="stylesheet" type="text/css" href="{% static 'gradeCurricular.css' %}">
+{% include 'menu.html' %}
+<div class="container">
+    <h2>Grade Curricular</h2>
 
-        <div class="grade">
-            {% for periodo in periodos %}
-                <div class="periodo">
-                    <div class="titulo-periodo">
-                        <h3>Período {{ periodo.numero }}</h3>
-                    </div>
-                    <div class="disciplinas">
-                        {% for disciplina in periodo.disciplinas.all %}
-                            <div class="disciplina">
-                                <p>{{ disciplina.nome }}</p>
-                                <!-- Adicione mais detalhes da disciplina conforme necessário -->
-                            </div>
-                        {% endfor %}
-                    </div>
+    <div class="grade">
+        {% for periodo in periodos %}
+            <div class="periodo">
+                <div class="titulo-periodo">
+                    <h3>Período {{ periodo.numero }}</h3>
                 </div>
-            {% endfor %}
-        </div>
-        <!-- Adicionar um novo período -->
-        <div class="adicionar-periodo">
-            <h3>Adicionar Novo Período</h3>
-            <form method="post" action="{% url 'adicionar_periodo' %}">
-                {% csrf_token %}
-                {{ periodo_form.as_p }}
-                <input type="submit" value="Adicionar Período">
-            </form>
-        </div>
+                <div class="disciplinas">
+                    {% for disciplina in periodo.disciplinas.all %}
+                        <div class="disciplina">
+                            <p>{{ disciplina.nome }}</p>
+                            <!-- Adicionar mais detalhes da disciplina -->
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
 
-        <!-- Adicionar uma nova disciplina -->
-        <div class="adicionar-disciplina">
-            <h3>Adicionar Nova Disciplina</h3>
-            <form method="post" action="{% url 'adicionar_disciplina' %}">
-                {% csrf_token %}
-                {{ disciplina_form.as_p }}
-                <input type="submit" value="Adicionar Disciplina">
-            </form>
-        </div>
     </div>
+    
+    <div class="adicionar-periodo">
+        <h3>Adicionar Novo Período</h3>
+        <form method="post" action="{% url 'adicionar_periodo' %}">
+            {% csrf_token %}
+            {{ periodo_form.as_p }}
+            <input type="submit" value="Adicionar Período">
+        </form>
+    </div>
+    
+    <div class="adicionar-disciplina">
+        <h3>Adicionar Nova Disciplina</h3>
+        <form method="post" action="{% url 'adicionar_disciplina' %}">
+            {% csrf_token %}
+            {{ disciplina_form.as_p }}
+            <input type="submit" value="Adicionar Disciplina">
+        </form>
+    </div>
+</div>
 {% endblock %}

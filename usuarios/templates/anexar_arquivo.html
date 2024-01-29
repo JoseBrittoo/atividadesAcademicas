@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block 'titulo'%} Anexar Arquivo {% endblock %}
+
+{% block 'conteudo' %} 
+<link rel="stylesheet" type="text/css" href="{% static 'anexar_arquivo.css' %}">
+<form method="post" action="{% url 'anexar_arquivo_default' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Anexar Arquivo">
+</form>
+{% endblock %}

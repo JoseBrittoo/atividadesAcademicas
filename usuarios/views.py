@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Usuario, Evento, Disciplina
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
 from .models import Evento, Periodo
-from .forms import EventoForm, PeriodoForm, DisciplinaGForm, DisciplinaForm
+from .forms import EventoForm, PeriodoForm, DisciplinaGForm, DisciplinaForm, AnexoForm
 from django.contrib.auth.decorators import login_required 
 
 
@@ -26,8 +26,15 @@ def disciplina(request):
     return render(request, 'disciplina.html', {'status': status})
 
 def caddisciplina(request):
-    status = request.GET.get('status')
-    return render(request, 'caddisciplina.html', {'status': status})
+    if request.method == 'POST':
+        # Lógica para processar o formulário e criar ou obter uma nova disciplina
+        nome_disciplina = request.POST.get('nome_disciplina')
+        disciplina, created = Disciplina.objects.get_or_create(nome_disciplina=nome_disciplina)
+        disciplina_id = disciplina.id if disciplina.id else None  
+        # Redirecione para a view de anexar arquivo, passando o ID da disciplina
+        return redirect('anexar_arquivo', disciplina_id=disciplina_id)
+    # Se o método da requisição não for POST, renderize o formulário vazio
+    return render(request, 'caddisciplina.html')
 
 def ac(request):
     status = request.GET.get('status')
@@ -94,6 +101,7 @@ def valida_login(request):
     
 def gradeCurricular(request):
     periodos = Periodo.objects.all()
+    print(periodos)  # Adicione esta linha para debug
     periodo_form = PeriodoForm()  # Adicionei isso para garantir que o formulário seja passado para o template
     disciplina_form = DisciplinaGForm()  # Adicionei isso para garantir que o formulário seja passado para o template
     return render(request, 'gradeCurricular.html', {'periodos': periodos, 'periodo_form': periodo_form, 'disciplina_form': disciplina_form})
@@ -213,3 +221,17 @@ def deletar_disciplina(request, disciplina_id):
     disciplina = Disciplina.objects.get(pk=disciplina_id)
     disciplina.delete()
     return redirect('lista_disciplina')
+
+def anexar_arquivo(request, disciplina_id):
+    #disciplina = Disciplina.objects.get(id=disciplina_id)
+    disciplina = get_object_or_404(Disciplina, id=disciplina_id)
+
+    if request.method == 'POST':
+        form = AnexoForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            anexo = form.save(commit=False)
+            anexo.disciplina = disciplina
+            anexo.save()
+            
+            return redirect('caddisciplina')  
+    return render(request, 'anexar_arquivo.html', {'form': form, 'disciplina': disciplina})

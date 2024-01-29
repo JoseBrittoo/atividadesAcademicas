@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Evento, Disciplina, DisciplinaG, Periodo, GradeCurricular
+from .models import Evento, Disciplina, DisciplinaG, Periodo, GradeCurricular, Anexo
 
 class EventoForm(ModelForm):
     class Meta:
@@ -52,3 +52,9 @@ class DisciplinaForm(ModelForm):
             'nome_disciplina': forms.TextInput(attrs={'class': 'input', 'placeholder': 'Disciplina'}),
             'descricao_disciplina': forms.TextInput(attrs={'class': 'input descricao-input', 'placeholder': '', 'style': 'margin-left: 10%; margin-right: 10%; padding: 4%'}),
         }
+
+class AnexoForm(forms.ModelForm):
+    class Meta:
+        model = Anexo
+        fields = ['arquivo']
+        
