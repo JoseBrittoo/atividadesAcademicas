@@ -4,6 +4,7 @@
 {% block 'titulo'%} Página Inicial {% endblock %}
 
 {% block 'conteudo' %} 
+
     {% include 'menu.html' %}
     <link rel="stylesheet" type="text/css" href="{% static 'paginaInicial.css' %}">
 
@@ -11,6 +12,11 @@
         <div class="content">
            <!-- Conteúdo principal da página -->
            <h1>Bem-vindo à Página Inicial</h1>
+           {% if user.is_authenticated %}
+                <p>Olá {{request.user.username }}</p>
+            {% else %}
+                <p>Nenhum usuário autenticado.</p>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

@@ -9,9 +9,14 @@
 
     <div class="container"> 
         <h1> Lista de Eventos </h1>
+        {% if user.is_authenticated %}
+                <p>Olá {{request.user.username }}</p>
+            {% else %}
+                <p>Nenhum usuário autenticado.</p>
+            {% endif %}
 
         <div class="text-right mb-3">
-            <a href="{% url 'criar_evento' %}" class="btn btn-outline-light">Criar Evento</a>
+            <a href="{% url 'usuarios:criar_evento' %}" class="btn btn-outline-light">Criar Evento</a>
         </div>
 
         {% for evento in eventos_lista %} 
@@ -34,14 +39,15 @@
                     <p>{{ evento.descricao }}</p>
                     
                     <div class="card-footer text-muted">
-                        <div class="ml-right">
-                            <a href="{% url 'atualizar_evento' evento_id=evento.id %}" class="btn btn-outline-info btn-sm">Atualizar</a>
-                            <a href="{% url 'deletar_evento' evento_id=evento.id %}" class="btn btn-outline-danger btn-sm">Deletar</a>
+                        <div class="ml-auto">
+                            <a href="{% url 'usuarios:atualizar_evento' evento_id=evento.id %}" class="btn btn-outline-info btn-sm">Atualizar</a>
+                            <a href="{% url 'usuarios:deletar_evento' evento_id=evento.id %}" class="btn btn-outline-danger btn-sm">Deletar</a>
                         </div>
                     </div>
                     </ul>
                 </div>
             </div>
         {% endfor %}
+        <br>
     </div>
 {% endblock %}

@@ -12,7 +12,7 @@
     <div class="content">
         <img src="{% static 'cad.png' %}" alt="Imagem de perfil" width="100">
 
-        <form method="post" action="{% url 'valida_cadastro' %}">
+        <form method="post" action="{% url 'usuarios:valida_cadastro' %}">
             {% csrf_token %} <!-- token de segurança para o usuário não saber onde enviar requisição e nem o tipo -->
 
             <h1>Cadastre-se</h1>
@@ -46,17 +46,20 @@
 
             <hr>
 
+            <label>Username</label>
+            <input name="user" id="user" class="form-control" type="text" placeholder="Username">
+
             <label>Email</label>
-            <input name='email' class="form-control" type="text" placeholder="Email">
+            <input name='email' id="email" class="form-control" type="email" placeholder="Email">
 
             <label>Senha</label>
-            <input name='senha' class="form-control" type="password" placeholder="Senha">
+            <input name='password' class="form-control" type="password" placeholder="Senha" id="password">
 
             <label>Repetir Senha</label>
-            <input name='senha' class="form-control" type="password" placeholder="Repita a senha">
+            <input name='password2' class="form-control" type="password" placeholder="Repita a senha" id="password2">
             <br>
             <input type="submit" class="btn" value="Enviar">
-            <a href="{% url 'login' %}">Já possui cadastro? Faça login</a>
+            <a href="{% url 'usuarios:flogin' %}">Já possui cadastro? Faça login</a>
         </form>
     </div>
 </div>

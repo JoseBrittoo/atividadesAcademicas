@@ -20,11 +20,11 @@
             <label>Nome:</label>
 
             {% for disciplina in disciplina_lista %} 
-            <a href="{% url 'acessar_disciplina' disciplina_id=disciplina.id %}" class="btn">{{ disciplina }}</a>
-            <a href="{% url 'deletar_disciplina' disciplina_id=disciplina.id %}">
+            <a href="{% url 'usuarios:acessar_disciplina' disciplina_id=disciplina.id %}" class="btn">{{ disciplina }}</a>
+            <a href="{% url 'usuarios:deletar_disciplina' disciplina_id=disciplina.id %}">
                 Deletar
             </a>
-            <a href="{% url 'atualizar_disciplina' disciplina_id=disciplina.id %}">
+            <a href="{% url 'usuarios:atualizar_disciplina' disciplina_id=disciplina.id %}">
                 | Alterar
             </a>
             <br>
@@ -32,7 +32,7 @@
             {% endfor %}
             <br>
             <br>
-            <a href="{% url 'cadastro_disciplina' %}">Cadastrar Disciplina</a>
+            <a href="{% url 'usuarios:cadastro_disciplina' %}">Cadastrar Disciplina</a>
         </form>
     </div>
 </div>

@@ -1,23 +1,24 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
-from .models import Usuario, Evento, Disciplina
+from django.http import HttpResponseRedirect
+from usuarios.models import User, Evento, Disciplina
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
 from .models import Evento, Periodo
 from .forms import EventoForm, PeriodoForm, DisciplinaGForm, DisciplinaForm
-from django.contrib.auth.decorators import login_required 
-
+from django.utils.safestring import mark_safe
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
 
 def home(request):
     return render(request, 'home.html')
 
-def login(request):
+def flogin(request):
     status = request.GET.get('status')
     return render(request, 'login.html', {'status': status})
 
-def cadastro(request):
+def fcadastro(request):
     status = request.GET.get('status')
     return render(request, 'cadastro.html', {'status': status})
 
@@ -36,41 +37,47 @@ def menu(request):
     return render(request, 'menu.html')
 
 def valida_cadastro(request):
-    email = request.POST.get('email')
-    senha = request.POST.get('senha')
+    if request.method == 'POST':
+        username = request.POST.get('user')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        password2 = request.POST.get('password2')
 
-    usuario = Usuario.objects.filter(email = email)
+        if password != password2:
+            return redirect('/accounts/fcadastro/?status=1')
 
-    #verifica se o email está vazios
-    if len(email.strip()) == 0:
-        return redirect('/auth/cadastro/?status=1')
+        try:
+            # Verifica se o nome de usuário já existe
+            user = User.objects.get(username=username)
+            return redirect('/accounts/fcadastro/?status=2')
+
+        except User.DoesNotExist:
+            # Se o usuário não existe, cria o novo usuário
+            user = User.objects.create_user(
+                username=username,
+                email=email,
+                password=password
+            )
+            user.save()
+            return redirect('/accounts/fcadastro/?status=0')
     
-    if len(senha) < 8:
-        return redirect('/auth/cadastro/?status=2')
-
-    #verifica se o email já existe
-    if len(usuario) > 0: 
-        return redirect('/auth/cadastro/?status=3')
-    
-    try: 
-        usuario = Usuario(email = email, senha = senha)
-        usuario.save()
-
-        return redirect('/auth/cadastro/?status=0')
-    except:
-        return redirect('/auth/cadastro/?status=4')
-    
+        
 def valida_login(request):
-    email = request.POST.get('email')
-    senha = request.POST.get('senha')  
+    username = request.POST.get('user')
+    password = request.POST.get('password')
 
-    usuario = Usuario.objects.filter(email = email, senha = senha)
+    # Autentica o usuário
+    user = authenticate(username=username, password=password)
 
-    if len(usuario) == 0:
-        return redirect('/auth/login/?status=1')
-    elif len(usuario) > 0:
-        request.session['usuario'] = usuario[0].id
-        return redirect('paginaInicial')
+    if user is not None:
+        # Verifica se o usuário está ativo
+        if user.is_active:
+            # Realiza o login
+            login(request, user)
+            return redirect('/accounts/paginaInicial/')
+    else:
+        # Credenciais inválidas
+        return redirect('/accounts/flogin/?status=1')
     
 def gradeCurricular(request):
     periodos = Periodo.objects.all()
@@ -83,7 +90,7 @@ def calendario(request, year=datetime.now().year, month=datetime.now().strftime(
     month_number = list(calendar.month_name).index(month)
     month_number = int(month_number)
     month = month.capitalize()
-    cal = HTMLCalendar().formatmonth(year, month_number)
+    cal = mark_safe(HTMLCalendar().formatmonth(year, month_number))
 
     #ano atual
     now = datetime.now() 
@@ -91,34 +98,34 @@ def calendario(request, year=datetime.now().year, month=datetime.now().strftime(
     #hora atual
     time = now.strftime("%H:%M %p")
 
-    return render(request, 'calendario.html', 
+    return render(request, 'usuarios:calendario.html', 
                   {
                     'year': year,
                     'month': month,
                     'month_number': month_number,
-                    'cal': cal,
+                    'cal': mark_safe(cal),
                     'time': time
                    })
 
-#@login_required(login_url='/auth/login/')
+
 def lista_eventos(request):
-    eventos_lista = Evento.objects.all().order_by('data_evento')
+    eventos_lista = Evento.objects.filter(usuario=request.user).order_by('data_evento')
     return render(request, 'lista_eventos.html', {'eventos_lista': eventos_lista})
 
-#@login_required(login_url='/auth/login/')
+
 def criar_evento(request):
     submitted = False
+
     if request.method == 'POST':
         form = EventoForm(request.POST)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/auth/criar_evento?submitted=True')
+            evento = form.save(commit=False)
+            evento.usuario = request.user
+            evento.save()
+            return HttpResponseRedirect('/accounts/criar_evento?submitted=True/')
     else:
         form = EventoForm
-        if 'submitted' in request.GET:
-            submitted = True
 
-    form = EventoForm
     return render(request, 'criar_evento.html', {'form': form, 'submitted': submitted})
 
 def atualizar_evento(request, evento_id):
@@ -127,7 +134,7 @@ def atualizar_evento(request, evento_id):
 
     if form.is_valid():
         form.save()
-        return redirect('lista_eventos')
+        return redirect('usuarios:lista_eventos')
 
     return render(request, 'atualizar_evento.html', {'evento': evento, 
     'form': form})
@@ -135,14 +142,14 @@ def atualizar_evento(request, evento_id):
 def deletar_evento(request, evento_id):
     evento = Evento.objects.get(pk=evento_id)
     evento.delete()
-    return redirect('lista_eventos')
+    return redirect('usuarios:lista_eventos')
 
 def adicionarPeriodo(request):
     if request.method == 'POST':
         periodo_form = PeriodoForm(request.POST)
         if periodo_form.is_valid():
             periodo_form.save()
-            return redirect('grade_curricular')
+            return redirect('usuarios:grade_curricular')
     else:
         periodo_form = PeriodoForm()
 
@@ -153,14 +160,14 @@ def adicionarDisciplina(request):
         disciplina_form = DisciplinaGForm(request.POST)
         if disciplina_form.is_valid():
             disciplina_form.save()
-            return redirect('grade_curricular')
+            return redirect('usuarios:grade_curricular')
     else:
         disciplina_form = DisciplinaGForm()
 
     return render(request, 'adicionar_disciplina.html', {'disciplina_form': disciplina_form})
 
 def lista_disciplina(request):
-    disciplina_lista = Disciplina.objects.all().order_by('nome_disciplina')
+    disciplina_lista = Disciplina.objects.filter(usuario=request.user).order_by('nome_disciplina')
     return render(request, 'lista_disciplina.html', {'disciplina_lista': disciplina_lista})
 
 def cadastro_disciplina(request):
@@ -168,8 +175,10 @@ def cadastro_disciplina(request):
     if request.method == 'POST':
         form = DisciplinaForm(request.POST)
         if form.is_valid():
+            disciplina = form.save(commit=False)
+            disciplina.usuario = request.user 
             form.save()
-            return HttpResponseRedirect('/auth/cadastro_disciplina?submitted=True')
+            return HttpResponseRedirect('/accounts/cadastro_disciplina?submitted=True')
     else:
         form = DisciplinaForm
         if 'submitted' in request.GET:
@@ -184,7 +193,7 @@ def atualizar_disciplina(request, disciplina_id):
 
     if form.is_valid():
         form.save()
-        return redirect('lista_disciplina')
+        return redirect('usuarios:lista_disciplina')
 
     return render(request, 'atualizar_disciplina.html', {'disciplina': disciplina, 
     'form': form})
@@ -192,4 +201,4 @@ def atualizar_disciplina(request, disciplina_id):
 def deletar_disciplina(request, disciplina_id):
     disciplina = Disciplina.objects.get(pk=disciplina_id)
     disciplina.delete()
-    return redirect('lista_disciplina')
+    return redirect('usuarios:lista_disciplina')

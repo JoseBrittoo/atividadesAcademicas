@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import Usuario, Evento
+from .models import Evento
 
-admin.site.register(Usuario)
 admin.site.register(Evento)
