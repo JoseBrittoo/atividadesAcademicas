@@ -10,7 +10,34 @@
     <div class="container">
         <div class="content">
            <!-- Conteúdo principal da página -->
-           <h1>Bem-vindo à Página Inicial</h1>
+           <img src="{% static 'agenda.png' %}" width="125" style="margin-bottom: 2%;">
+           <h1>Bem-vindo à</h1>
+           <h1>Página Inicial!</h1>
+           <label style="color: #85A7EF; margin-bottom: 2%;">✩₊˚.⋆☾⋆⁺₊✧ + ✩₊˚.⋆☾⋆⁺₊✧ + ✩₊˚.⋆☾⋆⁺₊✧ + ✩₊˚.⋆☾⋆⁺₊✧ </label>
+           <br>
+           <label style="background-color: #747B8A;">
+            <br>
+             
+            Já pensou ter um cronograma de eventos, onde é possível
+            <br>
+            visualizar atividades diárias, além de poder organizar suas
+            <br>
+            disciplinas acadêmicas  e grade curricular em um só lugar?
+            <br>
+            Se você tem problemas em organizar sua vida pessoal com sua vida profissional,
+            <br>
+              nosso aplicativo lhe ajudará a separar tempo para estudo entre tempo para descanso!  
+            <br>
+             
+        </label>
+        <br>
+        <label style="color: #85A7EF; margin-top: 2%;">✩₊˚.⋆☾⋆⁺₊✧ + ✩₊˚.⋆☾⋆⁺₊✧ + ✩₊˚.⋆☾⋆⁺₊✧ + ✩₊˚.⋆☾⋆⁺₊✧ </label>
+        <br>
+        <a href="{% url 'lista_disciplina' %}">Acessar Disciplina</a>
+        <br>
+        <a href="{% url 'cadastro_disciplina' %}">Cadastrar Disciplina</a>
+        <br>
+        <a href="{% url 'lista_eventos' %}">Acessar Cronograma</a>
         </div>
     </div>
 {% endblock %}
