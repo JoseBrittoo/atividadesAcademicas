@@ -11,7 +11,7 @@ urlpatterns = [
     path('valida_login/', views.valida_login, name = 'valida_login'),
     path('acessar_disciplina/<int:disciplina_id>/', views.acessar_disciplina, name='acessar_disciplina'),
     #Adicionado para ir direto para anexar arquivo
-    path('caddisciplina/anexar-arquivo/<int:disciplina_id>/', views.anexar_arquivo, name='anexar_arquivo'),
+    path('acessar_disciplina/anexar-arquivo/<int:disciplina_id>/', views.anexar_arquivo, name='anexar_arquivo'),
     path('paginaInicial/', views.paginaInicial, name = 'paginaInicial'),
     path('menu/', views.menu, name = 'menu'),
     path('gradeCurricular/', views.gradeCurricular, name = 'gradeCurricular'),
@@ -25,7 +25,7 @@ urlpatterns = [
     path('cadastro_disciplina', views.cadastro_disciplina, name = 'cadastro_disciplina'),
     path('atualizar_disciplina/<disciplina_id>', views.atualizar_disciplina, name = 'atualizar_disciplina'),
     path('deletar_disciplina/<disciplina_id>', views.deletar_disciplina, name = 'deletar_disciplina'),
-    path('grade_curricular/', views.gradeCurricular, name='grade_curricular'),
+    #path('grade_curricular/', views.gradeCurricular, name='grade_curricular'),
     path('adicionar_periodo/', views.adicionarPeriodo, name='adicionar_periodo'),
     path('adicionar_disciplina/', views.adicionarDisciplina, name='adicionar_disciplina'),
     path('anexar_arquivo/<int:disciplina_id>/', views.anexar_arquivo, name='anexar_arquivo'),

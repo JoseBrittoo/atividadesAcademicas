@@ -25,9 +25,9 @@ def acessar_disciplina(request, disciplina_id):
     disciplina = get_object_or_404(Disciplina, id=disciplina_id)
     return render(request, 'acessar_disciplina.html', {'disciplina': disciplina})
 
-def novatarefa(request):
+def nova_tarefa(request):
     status = request.GET.get('status')
-    return render(request, 'novatarefa.html', {'status': status})
+    return render(request, 'nova_tarefa.html', {'status': status})
 
 def paginaInicial(request):
     return render(request, 'paginaInicial.html')
@@ -206,5 +206,5 @@ def anexar_arquivo(request, disciplina_id):
             anexo.disciplina = disciplina
             anexo.save()
             
-            return redirect('cadastro_disciplina')  
+            return redirect('acessar_disciplina')  
     return render(request, 'anexar_arquivo.html', {'form': form, 'disciplina': disciplina})
