@@ -29,6 +29,13 @@
     <div class="leftcontainer">
         {{ form.descricao_disciplina }}
     </div>
+    <div class="leftcontainer">
+        <img src="{% static 'descricao.png' %}" width="30">
+        <label for="{{ form.descricao_disciplina.id_for_label }}">Tarefa</label>
+    </div>
+    <div class="leftcontainer">
+        {{ form.tarefa_disciplina }}
+    </div>
         <input type="submit" value="Cadastrar" class="btn btn-secondary" style="background-color: #8F9EBD; width: 20%; margin-top: 5%;">
 
 </form>

@@ -16,7 +16,7 @@
                 <img src="{% static 'user.png' %}" alt="user">
             </div>
             <div class="profile-name">
-                <p>Nome do usuário</p>
+                <p>{{ email }}Nome do usuario</p>
             </div>
         </div>
 
@@ -35,14 +35,14 @@
                 </a>
             </li>
             <li class="item">
-                <a href="">
+                <a href="{% url "lista_eventos" %}">
                     <span class="icon"><i class="bi bi-calendar-range"></i>
                     </span>
                     <span class="link">Cronograma</span>
                 </a>
             </li>
             <li class="item">
-                <a href="">
+                <a href="{% url "lista_disciplina" %}">
                     <span class="icon"><i class="bi bi-book"></i>
                     </span>
                     <span class="link">Disciplinas</span>

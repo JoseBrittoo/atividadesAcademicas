@@ -43,18 +43,20 @@ class GradeCurricularForm(ModelForm):
 class DisciplinaForm(ModelForm):
     class Meta:
         model = Disciplina
-        fields = ['nome_disciplina', 'descricao_disciplina']
+        fields = ['nome_disciplina', 'descricao_disciplina', 'tarefa_disciplina']
         labels = {
             'nome_disciplina': '',
-            'descricao_disciplina': 'Descrição'
-        }
+            'descricao_disciplina': 'Descrição',
+            'tarefa_disciplina': 'Tarefa'
+        } 
         widgets = {
             'nome_disciplina': forms.TextInput(attrs={'class': 'input', 'placeholder': 'Disciplina'}),
             'descricao_disciplina': forms.TextInput(attrs={'class': 'input descricao-input', 'placeholder': '', 'style': 'margin-left: 10%; margin-right: 10%; padding: 4%'}),
+            'tarefa_disciplina': forms.TextInput(attrs={'class': 'input', 'placeholder': '', 'style': 'margin-left: 10%; margin-right: 10%; padding: 4%'})
         }
 
 class AnexoForm(forms.ModelForm):
     class Meta:
         model = Anexo
         fields = ['arquivo']
-        
+          

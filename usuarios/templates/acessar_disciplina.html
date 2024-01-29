@@ -1,20 +1,19 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block 'titulo'%} Cadastro Disciplina {% endblock %}
+{% block 'titulo'%} Disciplina Ver {% endblock %}
 
 {% block 'conteudo' %} 
-<link rel="stylesheet" type="text/css" href="{% static 'caddisciplina.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'acssdisciplina.css' %}">
 
 <div class="leftcontainer">
-    <a href="{% url 'disciplina' %}">
+    <a href="{% url 'lista_disciplina' %}">
         <img src="{% static 'voltar.png' %}" width="30" alt="Voltar para disciplina">
     </a>
-    <h1> Nova Disciplina</h1>
 </div>
 
-<div class="leftcontainer">
-    <input type="text" placeholder="Disciplina">
+<div class="container">
+    <a class="btn">{{ disciplina.nome_disciplina }}</a>
 </div>
 
 <div class="leftcontainer">
@@ -23,7 +22,7 @@
 </div>
 
 <div class="leftcontainer">
-    <input type="text" style="margin-left: 10%; margin-right: 10%; padding: 4%">
+    <a class="btn" style="padding: 4%; background-color: #85A7EF;">{{ disciplina.descricao_disciplina }}</a>
 </div>
 
 <div class="leftcontainer">
@@ -32,7 +31,7 @@
 </div>
 
 <div class="leftcontainer">
-    <input type="text" style="margin-left: 10%; margin-right: 10%; padding: 3%" placeholder="Listar tarefas da disciplina aqui!">
+    <a class="tarefabtn" style="color: white;">{{ disciplina.tarefa_disciplina }}</a>
 </div>
 
 <div class="leftcontainer">
@@ -53,9 +52,5 @@
     <label>Anotações</label>
 </div>
 
-<div class="container" style="margin-left: 20%;">
-    <a href="{% url 'disciplina' %}" style="margin-right: 50%; color: white">CANCELAR</a>
-    <a href="{% url 'disciplina' %}" style="color: #85A7EF">CONFIRMAR</a>
-</div>
 
 {% endblock %}

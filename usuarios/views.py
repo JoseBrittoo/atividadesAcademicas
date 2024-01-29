@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Usuario, Evento, Disciplina
 import calendar
@@ -21,36 +21,9 @@ def cadastro(request):
     status = request.GET.get('status')
     return render(request, 'cadastro.html', {'status': status})
 
-def disciplina(request):
-    status = request.GET.get('status')
-    return render(request, 'disciplina.html', {'status': status})
-
-def caddisciplina(request):
-    if request.method == 'POST':
-        # Lógica para processar o formulário e criar ou obter uma nova disciplina
-        nome_disciplina = request.POST.get('nome_disciplina')
-        disciplina, created = Disciplina.objects.get_or_create(nome_disciplina=nome_disciplina)
-        disciplina_id = disciplina.id if disciplina.id else None  
-        # Redirecione para a view de anexar arquivo, passando o ID da disciplina
-        return redirect('anexar_arquivo', disciplina_id=disciplina_id)
-    # Se o método da requisição não for POST, renderize o formulário vazio
-    return render(request, 'caddisciplina.html')
-
-def ac(request):
-    status = request.GET.get('status')
-    return render(request, 'ac.html', {'status': status})
-
-def al(request):
-    status = request.GET.get('status')
-    return render(request, 'al.html', {'status': status})
-
-def md(request):
-    status = request.GET.get('status')
-    return render(request, 'md.html', {'status': status})
-
-def mc(request):
-    status = request.GET.get('status')
-    return render(request, 'mc.html', {'status': status})
+def acessar_disciplina(request, disciplina_id):
+    disciplina = get_object_or_404(Disciplina, id=disciplina_id)
+    return render(request, 'acessar_disciplina.html', {'disciplina': disciplina})
 
 def novatarefa(request):
     status = request.GET.get('status')
@@ -212,7 +185,7 @@ def atualizar_disciplina(request, disciplina_id):
 
     if form.is_valid():
         form.save()
-        return redirect('lista_disciplinas')
+        return redirect('lista_disciplina')
 
     return render(request, 'atualizar_disciplina.html', {'disciplina': disciplina, 
     'form': form})
@@ -233,5 +206,5 @@ def anexar_arquivo(request, disciplina_id):
             anexo.disciplina = disciplina
             anexo.save()
             
-            return redirect('caddisciplina')  
+            return redirect('cadastro_disciplina')  
     return render(request, 'anexar_arquivo.html', {'form': form, 'disciplina': disciplina})

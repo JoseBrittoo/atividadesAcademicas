@@ -1,3 +1,5 @@
+<!-- lista_disciplinas.html -->
+
 {% extends "base.html" %}
 {% load static %}
 
@@ -16,10 +18,14 @@
             <h1>DISCIPLINAS GRADUAÇÃO</h1>
 
             <label>Nome:</label>
+
             {% for disciplina in disciplina_lista %} 
-            <a href="{% url 'ac' %}" class="btn">{{ disciplina }}</a>
+            <a href="{% url 'acessar_disciplina' disciplina_id=disciplina.id %}" class="btn">{{ disciplina }}</a>
             <a href="{% url 'deletar_disciplina' disciplina_id=disciplina.id %}">
                 Deletar
+            </a>
+            <a href="{% url 'atualizar_disciplina' disciplina_id=disciplina.id %}">
+                | Alterar
             </a>
             <br>
             <br>
