@@ -65,7 +65,7 @@ nav.menu.expandir{
     object-fit: cover;
 }
 
-.profile-name {
+.profile-name p{
     color: #fff;
     font-size: 16px;
 }
@@ -102,4 +102,28 @@ ul li.item a .link{
 ul li.item a .icon > i{
     font-size: 25px;
     margin-left: 10px;
+}
+
+ul li.item-logout{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    transition: .2s;
+}
+
+ul li.item-logout:hover{
+    background: #161F33;
+}
+
+ul li.item-logout a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px 4%;
+    display: flex;
+    line-height: 40px;
+}
+
+ul li.item-logout a .link{
+    margin-left: 20px;
 }

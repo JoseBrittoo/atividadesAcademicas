@@ -35,8 +35,16 @@
 </div>
 
 <div class="leftcontainer">
-    <img src="{% static 'anexo.png' %}" width="30">
-    <label>Anexar arquivo</label>
+    <form method="post" action="{% url 'anexar_arquivo' disciplina_id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="id_arquivo">
+            <img src="{% static 'anexo.png' %}" width="30">
+            <span>Anexar arquivo</span>
+        </label>
+
+        <input type="file" name="arquivo" id="id_arquivo" style="display: none;">
+        <input type="submit" value="Anexar Arquivo">
+    </form>
 </div>
 
 <div class="leftcontainer">

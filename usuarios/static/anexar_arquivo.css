@@ -1,0 +1,32 @@
+
+    body {
+        background-color: #001f3f; /* Azul escuro para o fundo da tela */
+        color: #ffffff; /* Texto branco */
+    }
+
+    .container {
+        background-color: #3498db; /* Azul claro para a área da disciplina */
+        padding: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+
+    form {
+        background-color: #ffffff; /* Fundo branco para o formulário */
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    input[type="submit"] {
+        background-color: #3498db; /* Azul claro para o botão de envio */
+        color: #ffffff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #2980b9; /* Tom mais escuro ao passar o mouse */
+    }

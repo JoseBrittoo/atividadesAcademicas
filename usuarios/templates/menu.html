@@ -16,7 +16,7 @@
                 <img src="{% static 'user.png' %}" alt="user">
             </div>
             <div class="profile-name">
-                <p>{{ user.user }}Nome usuário</p>
+                <p>{{ request.user.username }}</p>
             </div>
         </div>
 
@@ -55,6 +55,12 @@
                     <span class="link">Grade Curricular</span>
                 </a>
             </li>
+            <li class="item-logout">
+                <a href="{% url "usuarios:fazer_logout" %}">
+                    <span class="icon"><i class="bi bi-box-arrow-left"></i>
+                    </span>
+                    <span class="link">Sair</span>
+                </a>
         </ul>
     </nav>
 

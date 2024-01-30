@@ -5,10 +5,11 @@ import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
 from .models import Evento, Periodo
-from .forms import EventoForm, PeriodoForm, DisciplinaGForm, DisciplinaForm
 from django.utils.safestring import mark_safe
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from .forms import EventoForm, PeriodoForm, DisciplinaGForm, DisciplinaForm, AnexoForm
+
 
 
 def home(request):
@@ -78,9 +79,14 @@ def valida_login(request):
     else:
         # Credenciais inválidas
         return redirect('/accounts/flogin/?status=1')
-    
+
+def fazer_logout(request):
+    logout(request)
+    return redirect('/accounts/flogin/')
+
 def gradeCurricular(request):
     periodos = Periodo.objects.all()
+    print(periodos)  # Adicione esta linha para debug
     periodo_form = PeriodoForm()  # Adicionei isso para garantir que o formulário seja passado para o template
     disciplina_form = DisciplinaGForm()  # Adicionei isso para garantir que o formulário seja passado para o template
     return render(request, 'gradeCurricular.html', {'periodos': periodos, 'periodo_form': periodo_form, 'disciplina_form': disciplina_form})
@@ -122,7 +128,7 @@ def criar_evento(request):
             evento = form.save(commit=False)
             evento.usuario = request.user
             evento.save()
-            return HttpResponseRedirect('/accounts/criar_evento?submitted=True/')
+            return redirect('usuarios:lista_eventos')
     else:
         form = EventoForm
 
@@ -178,7 +184,7 @@ def cadastro_disciplina(request):
             disciplina = form.save(commit=False)
             disciplina.usuario = request.user 
             form.save()
-            return HttpResponseRedirect('/accounts/cadastro_disciplina?submitted=True')
+            return redirect('usuarios:lista_disciplina')
     else:
         form = DisciplinaForm
         if 'submitted' in request.GET:
@@ -202,3 +208,17 @@ def deletar_disciplina(request, disciplina_id):
     disciplina = Disciplina.objects.get(pk=disciplina_id)
     disciplina.delete()
     return redirect('usuarios:lista_disciplina')
+
+def anexar_arquivo(request, disciplina_id):
+    #disciplina = Disciplina.objects.get(id=disciplina_id)
+    disciplina = get_object_or_404(Disciplina, id=disciplina_id)
+
+    if request.method == 'POST':
+        form = AnexoForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            anexo = form.save(commit=False)
+            anexo.disciplina = disciplina
+            anexo.save()
+            
+            return redirect('acessar_disciplina')  
+    return render(request, 'anexar_arquivo.html', {'form': form, 'disciplina': disciplina})
