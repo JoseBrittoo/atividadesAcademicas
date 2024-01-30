@@ -27,4 +27,4 @@ Depois de feitos os passos anteriores devemos agora startar nosso servidor local
 ```
 python manage.py runserver
 ```
-Após o start deve aparecer algo assim: 'http://127.0.0.1:8000/' dê Ctrl+clique, que irá para um página no seu navegador, depois que carregar adicione 'http://127.0.0.1:800/accounts/fcadastro/'
+Após o start deve aparecer algo assim: 'http://127.0.0.1:8000/' dê Ctrl+clique, que irá para um página no seu navegador, depois que carregar adicione 'http://127.0.0.1:8000/accounts/fcadastro/'
