@@ -60,7 +60,7 @@ def valida_cadastro(request):
                 password=password
             )
             user.save()
-            return redirect('/accounts/fcadastro/?status=0')
+            return redirect('/accounts/flogin/')
     
         
 def valida_login(request):
