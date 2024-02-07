@@ -1,7 +1,8 @@
 from django.urls import path, include
 from . import views
-from django.conf import settings
-from django.conf.urls.static import static
+
+from django.conf import settings           #para visualizar aenxos
+from django.conf.urls.static import static  #para visualizar aenxos
 
 app_name = 'usuarios'
 
@@ -33,6 +34,7 @@ urlpatterns = [
     path('adicionar_periodo/', views.adicionarPeriodo, name='adicionar_periodo'),
     path('adicionar_disciplina/', views.adicionarDisciplina, name='adicionar_disciplina'),
     path('anexar_arquivo/<int:disciplina_id>/', views.anexar_arquivo, name='anexar_arquivo'),
-    path('auth/anexar_arquivo/', views.anexar_arquivo, name='anexar_arquivo_default'),
+    #path('anexar_arquivo/', views.anexar_arquivo, name='anexar_arquivo_default'),
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

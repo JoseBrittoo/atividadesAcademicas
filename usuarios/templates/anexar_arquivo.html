@@ -3,8 +3,8 @@
 {% block 'titulo'%} Anexar Arquivo {% endblock %}
 
 {% block 'conteudo' %} 
-<link rel="stylesheet" type="text/css" href="{% static 'anexar_arquivo.css' %}">
-<form method="post" action="{% url 'usuarios:anexar_arquivo_default' %}" enctype="multipart/form-data">
+<link rel="stylesheet" type="text/css" href="{% static 'anexar_arquivo.css'%}">
+<form method="post" action="{% url 'usuarios:anexar_arquivo' disciplina_id=disciplina.id%}" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Anexar Arquivo">

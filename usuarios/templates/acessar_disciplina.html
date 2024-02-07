@@ -38,7 +38,7 @@
     <form method="post" action="{% url 'usuarios:anexar_arquivo' disciplina_id=disciplina.id %}" enctype="multipart/form-data">
         {% csrf_token %}
         <label for="id_arquivo">
-            <img src="{% static 'anexo.png' %}" width="30">
+            <img src="{% static 'anexo.png' %}" width="20">
             <span>Anexar arquivo</span>
         </label>
 
@@ -46,6 +46,16 @@
         <input type="submit" value="Anexar Arquivo">
     </form>
 </div>
+
+<div class="leftcontainer">
+    <label>Arquivos Anexados:</label>
+    <ul>
+        {% for anexo in anexos %}
+            <li><a href="{{ anexo.arquivo.url }}" target="_blank">{{ anexo.arquivo.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+
 
 <div class="leftcontainer">
     <img src="{% static 'anotacoes.png' %}" width="30">

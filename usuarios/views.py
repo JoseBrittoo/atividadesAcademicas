@@ -4,7 +4,7 @@ from usuarios.models import User, Evento, Disciplina
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
-from .models import Evento, Periodo
+from .models import Evento, Periodo, Anexo
 from django.utils.safestring import mark_safe
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
@@ -210,15 +210,24 @@ def deletar_disciplina(request, disciplina_id):
     return redirect('usuarios:lista_disciplina')
 
 def anexar_arquivo(request, disciplina_id):
-    #disciplina = Disciplina.objects.get(id=disciplina_id)
-    disciplina = get_object_or_404(Disciplina, id=disciplina_id)
+    disciplina = Disciplina.objects.get(id=disciplina_id)
+    #disciplina = get_object_or_404(Disciplina, id=disciplina_id)
 
     if request.method == 'POST':
-        form = AnexoForm(request.POST or None, request.FILES or None)
+        form = AnexoForm(request.POST, request.FILES)
         if form.is_valid():
             anexo = form.save(commit=False)
             anexo.disciplina = disciplina
+            anexo.usuario = request.user
             anexo.save()
             
-            return redirect('acessar_disciplina')  
+            
+            return redirect('usuarios:lista_disciplina')  
+        else:
+            form = AnexoForm()
     return render(request, 'anexar_arquivo.html', {'form': form, 'disciplina': disciplina})
+
+def acessar_disciplina(request, disciplina_id):
+    disciplina = Disciplina.objects.get(id=disciplina_id)
+    anexos = Anexo.objects.filter(disciplina=disciplina)
+    return render(request, 'acessar_disciplina.html', {'disciplina': disciplina, 'anexos': anexos})

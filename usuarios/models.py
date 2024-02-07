@@ -50,8 +50,9 @@ class Disciplina(models.Model):
     
 class Anexo(models.Model):
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     arquivo = models.FileField(upload_to='anexos/')
 
     def __str__(self):
-        return f"Anexo para {self.disciplina.nome}"
+        return self.arquivo.name
 
