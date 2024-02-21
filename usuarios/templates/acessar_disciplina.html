@@ -8,7 +8,7 @@
 
 <div class="leftcontainer">
     <a href="{% url 'usuarios:lista_disciplina' %}">
-        <img src="{% static 'voltar.png' %}" width="30" alt="Voltar para disciplina">
+        <img src="{% static 'voltar.png' %}" width="25" alt="Voltar para disciplina">
     </a>
 </div>
 
@@ -38,7 +38,7 @@
     <form method="post" action="{% url 'usuarios:anexar_arquivo' disciplina_id=disciplina.id %}" enctype="multipart/form-data">
         {% csrf_token %}
         <label for="id_arquivo">
-            <img src="{% static 'anexo.png' %}" width="20">
+            <img src="{% static 'anexo.png' %}" width="30">
             <span>Anexar arquivo</span>
         </label>
 
@@ -51,16 +51,27 @@
     <label>Arquivos Anexados:</label>
     <ul>
         {% for anexo in anexos %}
-            <li><a href="{{ anexo.arquivo.url }}" target="_blank">{{ anexo.arquivo.name }}</a></li>
+            <li><a href="{{ anexo.arquivo.url }}" target="_blank">{{ anexo.arquivo.name }}</a>
+            </li>
         {% endfor %}
     </ul>
 </div>
 
 
 <div class="leftcontainer">
-    <img src="{% static 'anotacoes.png' %}" width="30">
-    <label>Anotações</label>
+    <a href="{% url 'usuarios:adicionar_anotacao' disciplina_id=disciplina.id %}">
+        <img src="{% static 'anotacoes.png' %}" width="30">
+        <label>Anotações</label>
+    </a>
 </div>
 
+<div class="leftcontainer">
+    <label>Anotações:</label>
+    <ul>
+        {% for anotacao in anotacoes %}
+            <li>{{ anotacao.texto }}</li>
+        {% endfor %}
+    </ul>
+</div>
 
 {% endblock %}

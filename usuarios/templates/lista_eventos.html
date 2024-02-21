@@ -14,7 +14,7 @@
             {% else %}
                 <p>Nenhum usuário autenticado.</p>
             {% endif %}
-
+        {{ calendar }}
         <div class="text-right mb-3">
             <a href="{% url 'usuarios:criar_evento' %}" class="btn btn-outline-light">Criar Evento</a>
         </div>

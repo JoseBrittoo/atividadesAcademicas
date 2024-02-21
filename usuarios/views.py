@@ -8,7 +8,7 @@ from .models import Evento, Periodo, Anexo
 from django.utils.safestring import mark_safe
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from .forms import EventoForm, PeriodoForm, DisciplinaGForm, DisciplinaForm, AnexoForm
+from .forms import EventoForm, PeriodoForm, DisciplinaGForm, DisciplinaForm, AnexoForm, AnotacaoForm
 
 
 
@@ -231,3 +231,16 @@ def acessar_disciplina(request, disciplina_id):
     disciplina = Disciplina.objects.get(id=disciplina_id)
     anexos = Anexo.objects.filter(disciplina=disciplina)
     return render(request, 'acessar_disciplina.html', {'disciplina': disciplina, 'anexos': anexos})
+
+def adicionar_anotacao(request, disciplina_id):
+    if request.method == 'POST':
+        form = AnotacaoForm(request.POST)
+        if form.is_valid():
+            anotacao = form.save(commit=False)
+            anotacao.usuario = request.user
+            anotacao.disciplina_id = disciplina_id
+            anotacao.save()
+            return redirect('usuarios:lista_disciplina')
+    else:
+        form = AnotacaoForm()
+    return render(request, 'adicionar_anotacao.html', {'form': form})

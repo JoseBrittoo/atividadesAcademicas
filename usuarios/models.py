@@ -51,8 +51,13 @@ class Disciplina(models.Model):
 class Anexo(models.Model):
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    arquivo = models.FileField(upload_to='anexos/')
+    arquivo = models.FileField(upload_to='')
 
     def __str__(self):
         return self.arquivo.name
 
+class Anotacao(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
+    texto = models.TextField()
+    data_criacao = models.DateTimeField(auto_now_add=True)

@@ -34,7 +34,8 @@ urlpatterns = [
     path('adicionar_periodo/', views.adicionarPeriodo, name='adicionar_periodo'),
     path('adicionar_disciplina/', views.adicionarDisciplina, name='adicionar_disciplina'),
     path('anexar_arquivo/<int:disciplina_id>/', views.anexar_arquivo, name='anexar_arquivo'),
+    path('adicionar_anotacao/<int:disciplina_id>/', views.adicionar_anotacao, name='adicionar_anotacao'),
     #path('anexar_arquivo/', views.anexar_arquivo, name='anexar_arquivo_default'),
 ]
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -124,7 +124,7 @@ STATIC_URL = 'static/'
 
 #Arquivos de Media/uploud
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'anexos')
-MEDIA_URL = '/anexos/'
+MEDIA_URL = '/accounts/anexos/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

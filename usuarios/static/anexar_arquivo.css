@@ -13,14 +13,14 @@
     }
 
     form {
-        background-color: #ffffff; /* Fundo branco para o formulário */
+        background-color: #000; /* Fundo branco para o formulário */
         padding: 20px;
         border-radius: 10px;
     }
 
     input[type="submit"] {
         background-color: #3498db; /* Azul claro para o botão de envio */
-        color: #ffffff;
+        color: #fff;
         padding: 10px 20px;
         border: none;
         border-radius: 5px;
@@ -30,3 +30,6 @@
     input[type="submit"]:hover {
         background-color: #2980b9; /* Tom mais escuro ao passar o mouse */
     }
+
+    
+    

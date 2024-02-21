@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Evento, Disciplina, DisciplinaG, Periodo, GradeCurricular, Anexo
+from .models import Evento, Disciplina, DisciplinaG, Periodo, GradeCurricular, Anexo, Anotacao
 
 class EventoForm(ModelForm):
     class Meta:
@@ -60,3 +60,7 @@ class AnexoForm(forms.ModelForm):
         model = Anexo
         fields = ['arquivo']
           
+class AnotacaoForm(forms.ModelForm):
+    class Meta:
+        model = Anotacao
+        fields = ['texto']

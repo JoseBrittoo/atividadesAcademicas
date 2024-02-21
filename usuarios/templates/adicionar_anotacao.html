@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block 'titulo'%} Anexar Anotação {% endblock %}
+
+{% block 'conteudo' %} 
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Adicionar Anotação</button>
+</form>
+{% endblock %}
